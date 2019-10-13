@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "python-shell": "^1.0.8",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "react-start": "BROWSER=NONE react-scripts start",
-    "electron-start": "DEV=1 electron .",
-    "start": "concurrently 'npm run react-start' 'wait-on http://localhost:3000/ && npm run electron-start'",
+    "react-start": "react-scripts start",
+    "electron-start": "set DEV=1 && electron .",
+    "start": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000/ && npm run electron-start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
