@@ -1,8 +1,9 @@
 const electron = require('electron');
 const path = require('path');
 const url = require('url');
-// const {PythonShell} = require('python-shell')
-// const {ipcMain} = require('electron');
+
+const { ipcMain } = electron;
+const { PythonShell } = require('python-shell')
 
 const { app } = electron;
 const { BrowserWindow } = electron;
@@ -17,7 +18,14 @@ function createWindow() {
         protocol: 'file:',
         slashes: true,
       });
-  mainWindow = new BrowserWindow();
+  mainWindow = new BrowserWindow(
+    {
+      webPreferences: {
+        //nodeIntegration: true,
+        preload: __dirname + '/preload.js'
+      }
+    }
+  );
 
   mainWindow.loadURL(startUrl);
   process.env.DEV && mainWindow.webContents.openDevTools();
@@ -26,6 +34,24 @@ function createWindow() {
     mainWindow = null;
   });
 }
+
+ipcMain.on('request-mainprocess-speak', (event) => {
+  console.log('Main received request to speak from renderer');
+
+  let script_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/pythonScript/pythonNAO.py';
+  PythonShell.run(script_path, null, function (err, output) {
+    if (err) throw err;
+    console.log('finished running python script:', output);
+  });
+
+  // // let py_string = 'from naoqi import ALProxy;tts=ALProxy("ALTextToSpeech", "10.0.1.133", 9559);tts.say("Hi Jean!")';
+  // let py_string = 'print("Hello Python World");print("Hello Twice!");';
+
+  // PythonShell.runString(py_string, null, function (err, output) {
+  //   if (err) throw err;
+  //   console.log('finished running python code:', output);
+  // });
+});
 
 app.on('ready', createWindow);
 
@@ -40,25 +66,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-/*
-// Attach listener in the main process with the given ID
-ipcMain.on('request-mainprocess-action', (event, arg) => {
-  // Displays the object sent from the renderer process:
-  //{
-  //    message: "Hi",
-  //    someData: "Let's go"
-  //}
-  console.log(
-      arg
-  );
-  console.log('TESSSSSSSSSSSSSSSSSSSSSSSSSSSST');
-
-});
-  // let py_string = 'from naoqi import ALProxy;tts=ALProxy("ALTextToSpeech", "10.0.1.133", 9559);tts.say("Hi Jean!")';
-
-  // PythonShell.runString(py_string, null, function (err) {
-  //   if (err) throw err;
-  //   console.log('finished');
-  // });
-*/
