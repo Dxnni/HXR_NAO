@@ -8,24 +8,24 @@ class PythonNAO {
 
   static textToSpeech(text){
     if(text){
-      console.log('Main requesting Python for tts: '+text);
+      console.log('Main: Requesting Python for tts: '+text);
 
       const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
       PythonShell.run(full_path+'tts.py', {args:[text]}, (err, output) => {
           if (err) throw err;
-          console.log('Successfully ran tts.py: '+output);
+          console.log('Main: Successfully ran tts.py: '+output);
       });
     }   
   }
 
   static goToPost(post){
     if(post){
-      console.log('Main requesting Python to change posture: '+post);
+      console.log('Main: Requesting Python to change posture: '+post);
 
       const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
       PythonShell.run(full_path+'posture.py', {args:[post]}, (err, output) => {
           if (err) throw err;
-          console.log('Successfully ran posture.py: '+output);
+          console.log('Main: Successfully ran posture.py: '+output);
       });
     }
   }
@@ -33,12 +33,13 @@ class PythonNAO {
   static runScript(scriptName){
     if(scriptName){
       if((scriptName === 'move') || (scriptName === 'sonar') || (scriptName === 'touch') || (scriptName === 'video')){
-        console.log('Main requesting Python to run script: '+scriptName);
+        console.log('Main: Requesting Python to run script: '+scriptName);
 
         const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
         PythonShell.run(full_path+scriptName+'.py', null, (err, output) => {
             if (err) throw err;
-            console.log('Successfully ran '+scriptName+'.py: '+output);
+            console.log('Main: Successfully ran '+scriptName+'.py: '+output);
+            return output;
         });
       }
     }

@@ -5,7 +5,9 @@ import ElectronNAO from './ElectronNAO';
 
 function App() {
   
+  console.log('TOUCH NAO is still in progess and disabled');
   //TODO: fix error when desktop app opens, all buttons are clicked once
+  
   const tts = (text) => {
     ElectronNAO.textToSpeech(text);
   }
@@ -32,7 +34,8 @@ function App() {
   }
 
   const runPy = (script) => {
-    ElectronNAO.runScript(script);
+    let output = ElectronNAO.runScript(script);
+    console.log('Output from script', script+'.py:\n', output);
   }
 
   return (

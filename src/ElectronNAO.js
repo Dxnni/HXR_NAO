@@ -23,6 +23,12 @@ export default class ElectronNAO {
                 console.log('Client requesting Main to run script: '+script);
                 window.ipcRenderer.send('req-script', script);
             }
+
+            window.ipcRenderer.on('req-script-output', (event, output) => {
+                if(output){
+                    return output;
+                }
+            })
         }
     }
 }

@@ -48,7 +48,8 @@ ipcMain.on('req-post', (event, post) => {
 
 ipcMain.on('req-script', (event, script) => {
   if(script){
-    PythonNAO.runScript(script);
+    let output = PythonNAO.runScript(script);
+    if(output) event.sender.send('req-script-output', output);
   }
 });
 
