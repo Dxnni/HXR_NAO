@@ -5,7 +5,7 @@ import ElectronNAO from './ElectronNAO';
 
 function App() {
   
-  //TODO: fix error when desktop app opens, both buttons are clicked once
+  //TODO: fix error when desktop app opens, all buttons are clicked once
   const tts = (text) => {
     ElectronNAO.textToSpeech(text);
   }
@@ -31,6 +31,10 @@ function App() {
     */    
   }
 
+  const runPy = (script) => {
+    ElectronNAO.runScript(script);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -46,7 +50,27 @@ function App() {
         <button
           onClick = {changePost()}
         > 
-          MOVE NAO!
+          CROUCH NAO!
+        </button>
+        <button
+          onClick = {runPy('move')}
+        > 
+          FORWARD NAO!
+        </button>
+        <button
+          onClick = {runPy('sonar')}
+        > 
+          SONAR NAO!
+        </button>
+        <button
+          onClick = {runPy('video')}
+        > 
+          RECORD NAO!
+        </button>
+        <button
+          // onClick = {runPy('touch')}
+        > 
+          TOUCH NAO!
         </button>
 
       </header>

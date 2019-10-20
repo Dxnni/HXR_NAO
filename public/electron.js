@@ -46,6 +46,12 @@ ipcMain.on('req-post', (event, post) => {
   }
 });
 
+ipcMain.on('req-script', (event, script) => {
+  if(script){
+    PythonNAO.runScript(script);
+  }
+});
+
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {

@@ -29,6 +29,20 @@ class PythonNAO {
       });
     }
   }
+
+  static runScript(scriptName){
+    if(scriptName){
+      if((scriptName === 'move') || (scriptName === 'sonar') || (scriptName === 'touch') || (scriptName === 'video')){
+        console.log('Main requesting Python to run script: '+scriptName);
+
+        const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
+        PythonShell.run(full_path+scriptName+'.py', null, (err, output) => {
+            if (err) throw err;
+            console.log('Successfully ran '+scriptName+'.py: '+output);
+        });
+      }
+    }
+  }
 }
 
 module.exports = PythonNAO;

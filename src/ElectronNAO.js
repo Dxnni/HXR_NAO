@@ -16,4 +16,13 @@ export default class ElectronNAO {
             window.ipcRenderer.send('req-post', post);
         }
     }
+
+    static runScript(script){        
+        if(isElectron() && script){
+            if((script === 'move') || (script === 'sonar') || (script === 'touch') || (script === 'video')){
+                console.log('Client requesting Main to run script: '+script);
+                window.ipcRenderer.send('req-script', script);
+            }
+        }
+    }
 }
