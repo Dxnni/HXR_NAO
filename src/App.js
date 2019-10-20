@@ -1,18 +1,34 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import isElectron from 'is-electron';
+import ElectronNAO from './ElectronNAO';
 
 function App() {
+  
+  //TODO: fix error when desktop app opens, both buttons are clicked once
+  const tts = (text) => {
+    ElectronNAO.textToSpeech(text);
+  }
 
-  const speak = () => {
-    // Send information to the main process
-    // if a listener has been set, then the main process
-    // will react to the request !
-    if(isElectron()){
-      console.log('Button Clicked on Renderer. Requesting main to speak');
-      window.ipcRenderer.send('request-mainprocess-speak');
+  let count=0;
+  const changePost = () => {    
+    if(count%2===0){
+      ElectronNAO.goToPost('Crouch');
+    }else{
+      ElectronNAO.goToPost('Stand');
     }
+    count++;
+    /*
+      Possible Positions:
+        Crouch,
+        LyingBack,
+        LyingBelly,
+        Sit,
+        SitRelax,
+        Stand,
+        StandInit,
+        StandZero
+    */    
   }
 
   return (
@@ -21,20 +37,16 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
-        </p>
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-
+        </p>              
         <button
-          onClick = {speak}
+          onClick = {tts('Danny, my pipeline works! You did it! Great job homie!')}
         > 
           SPEAK NAO!
+        </button>
+        <button
+          onClick = {changePost()}
+        > 
+          MOVE NAO!
         </button>
 
       </header>
