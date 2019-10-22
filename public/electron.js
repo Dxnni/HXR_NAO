@@ -48,8 +48,11 @@ ipcMain.on('req-post', (event, post) => {
 
 ipcMain.on('req-script', (event, script) => {
   if(script){
+    //TODO: get output from script in PythonNAO to the UI
+    //TODO: theory-output is always undefined when ran because it doesn't wait for runScript to finish
     let output = PythonNAO.runScript(script);
-    if(output) event.sender.send('req-script-output', output);
+    console.log('Electron.js:', script+'.py output:\n', output);
+    event.sender.send('req-script-output', output);
   }
 });
 

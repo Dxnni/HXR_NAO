@@ -1,3 +1,9 @@
+#!/usr/bin/python2.7
+import sys
+
+if sys.version_info[0] > 2:
+    raise Exception("Python 2 is required.")
+
 import qi
 import argparse
 import functools
@@ -54,3 +60,22 @@ class ReactToTouch(object):
         sentence = sentence + " touched."
 
         self.tts.say(sentence)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--ip", type=str, default="10.0.1.133",
+                        help="Robot IP address. On robot or Local Naoqi: use '10.0.1.133'.")
+    parser.add_argument("--port", type=int, default=9559,
+                        help="Naoqi port number")
+
+    args = parser.parse_args()
+    try:
+        # Initialize qi framework.
+        connection_url = "tcp://" + args.ip + ":" + str(args.port)
+        app = qi.Application(["ReactToTouch", "--qi-url=" + connection_url])
+    except RuntimeError:
+        print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) +".\n"
+               "Please check your script arguments. Run with -h option for help.")
+        sys.exit(1)
+    react_to_touch = ReactToTouch(app)
+    app.run()

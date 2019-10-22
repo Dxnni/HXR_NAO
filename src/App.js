@@ -1,25 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ElectronNAO from './ElectronNAO';
 
-function App() {
-  
-  console.log('TOUCH NAO is still in progess and disabled');
-  //TODO: fix error when desktop app opens, all buttons are clicked once
-  
-  const tts = (text) => {
+class App extends Component {
+    
+  tts = () => {
+    let text = 'Hi';
     ElectronNAO.textToSpeech(text);
   }
 
-  let count=0;
-  const changePost = () => {    
-    if(count%2===0){
+  count=0;
+  changePost = () => {    
+    if(this.count%2===0){
       ElectronNAO.goToPost('Crouch');
     }else{
-      ElectronNAO.goToPost('Stand');
+      ElectronNAO.goToPost('StandInit');
     }
-    count++;
+    this.count++;
     /*
       Possible Positions:
         Crouch,
@@ -33,52 +31,78 @@ function App() {
     */    
   }
 
-  const runPy = (script) => {
+  runMove = () => {
+    let script = 'move';
+    let output = ElectronNAO.runScript(script);
+    console.log('Output from script', script+'.py:\n', output);    
+  }
+
+  runSonar = () => {
+    let script = 'sonar';
+    ElectronNAO.runScript(script);
+    window.ipcRenderer.on('req-script-output', (event, output) => {
+      if(output){
+        console.log('Output from script', script+'.py:\n', output);
+      }
+    })   
+  }
+
+  runVideo = () => {
+    let script = 'video';
     let output = ElectronNAO.runScript(script);
     console.log('Output from script', script+'.py:\n', output);
   }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>              
-        <button
-          onClick = {tts('Danny, my pipeline works! You did it! Great job homie!')}
-        > 
-          SPEAK NAO!
-        </button>
-        <button
-          onClick = {changePost()}
-        > 
-          CROUCH NAO!
-        </button>
-        <button
-          onClick = {runPy('move')}
-        > 
-          FORWARD NAO!
-        </button>
-        <button
-          onClick = {runPy('sonar')}
-        > 
-          SONAR NAO!
-        </button>
-        <button
-          onClick = {runPy('video')}
-        > 
-          RECORD NAO!
-        </button>
-        <button
-          // onClick = {runPy('touch')}
-        > 
-          TOUCH NAO!
-        </button>
+  runTouch = () => {
+    let script = 'touch';
+    let output = ElectronNAO.runScript(script);
+    console.log('Output from script', script+'.py:\n', output);
+  }
 
-      </header>
-    </div>
-  );
+  render(){
+    console.log('TOUCH NAO is still in progess and will continue running after enabled');
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>              
+          <button
+            onClick = {this.tts}
+          > 
+            SPEAK NAO!
+          </button>
+          <button
+            onClick = {this.changePost}
+          > 
+            CROUCH NAO!
+          </button>
+          <button
+            onClick = {this.runMove}
+          > 
+            FORWARD NAO!
+          </button>
+          <button
+            onClick = {this.runSonar}
+          > 
+            SONAR NAO!
+          </button>
+          <button
+            onClick = {this.runVideo}
+          > 
+            RECORD NAO!
+          </button>
+          <button
+            onClick = {this.runTouch}
+          > 
+            TOUCH NAO!
+          </button>
+
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;

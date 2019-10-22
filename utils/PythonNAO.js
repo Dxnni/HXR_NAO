@@ -3,6 +3,7 @@ const { PythonShell } = require('python-shell');
 class PythonNAO {
 
   //TODO: replace hardcoded full_path to be relative
+  //URGENT: robot will move perfectly on first connection to app, but move improperly and fall on subsequent connections of app
 
   script_path = '../scripts/';
 
@@ -13,7 +14,7 @@ class PythonNAO {
       const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
       PythonShell.run(full_path+'tts.py', {args:[text]}, (err, output) => {
           if (err) throw err;
-          console.log('Main: Successfully ran tts.py: '+output);
+          console.log('Main: Successfully ran tts.py:\n'+output);
       });
     }   
   }
@@ -25,12 +26,13 @@ class PythonNAO {
       const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
       PythonShell.run(full_path+'posture.py', {args:[post]}, (err, output) => {
           if (err) throw err;
-          console.log('Main: Successfully ran posture.py: '+output);
+          console.log('Main: Successfully ran posture.py:\n'+output);
       });
     }
   }
 
   static runScript(scriptName){
+    let result = [];
     if(scriptName){
       if((scriptName === 'move') || (scriptName === 'sonar') || (scriptName === 'touch') || (scriptName === 'video')){
         console.log('Main: Requesting Python to run script: '+scriptName);
@@ -38,11 +40,12 @@ class PythonNAO {
         const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
         PythonShell.run(full_path+scriptName+'.py', null, (err, output) => {
             if (err) throw err;
-            console.log('Main: Successfully ran '+scriptName+'.py: '+output);
-            return output;
+            console.log('Main: Successfully ran '+scriptName+'.py:\n'+output);
+            result = output;
         });
       }
     }
+    return result;
   }
 }
 
