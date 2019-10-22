@@ -1,106 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import ElectronNAO from './ElectronNAO';
 
+
+import logo, { ReactComponent } from './logo.svg';
+import Home from './components/home/Home';
+import Sidebar from './components/sidebar/Sidebar';
+import StatusBar from './components/statusbar/StatusBar'
+import TTS from './components/tts/TTS';
+import Action from './components/movement/Actions';
+
+import './App.css';
+
+
+
 class App extends Component {
-    
-  tts = () => {
-    let text = 'Hi';
-    ElectronNAO.textToSpeech(text);
-  }
-
-  count=0;
-  changePost = () => {    
-    if(this.count%2===0){
-      ElectronNAO.goToPost('Crouch');
-    }else{
-      ElectronNAO.goToPost('StandInit');
-    }
-    this.count++;
-    /*
-      Possible Positions:
-        Crouch,
-        LyingBack,
-        LyingBelly,
-        Sit,
-        SitRelax,
-        Stand,
-        StandInit,
-        StandZero
-    */    
-  }
-
-  runMove = () => {
-    let script = 'move';
-    let output = ElectronNAO.runScript(script);
-    console.log('Output from script', script+'.py:\n', output);    
-  }
-
-  runSonar = () => {
-    let script = 'sonar';
-    ElectronNAO.runScript(script);
-    window.ipcRenderer.on('req-script-output', (event, output) => {
-      if(output){
-        console.log('Output from script', script+'.py:\n', output);
-      }
-    })   
-  }
-
-  runVideo = () => {
-    let script = 'video';
-    let output = ElectronNAO.runScript(script);
-    console.log('Output from script', script+'.py:\n', output);
-  }
-
-  runTouch = () => {
-    let script = 'touch';
-    let output = ElectronNAO.runScript(script);
-    console.log('Output from script', script+'.py:\n', output);
-  }
-
-  render(){
-    console.log('TOUCH NAO is still in progess and will continue running after enabled');
+  render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>              
-          <button
-            onClick = {this.tts}
-          > 
-            SPEAK NAO!
-          </button>
-          <button
-            onClick = {this.changePost}
-          > 
-            CROUCH NAO!
-          </button>
-          <button
-            onClick = {this.runMove}
-          > 
-            FORWARD NAO!
-          </button>
-          <button
-            onClick = {this.runSonar}
-          > 
-            SONAR NAO!
-          </button>
-          <button
-            onClick = {this.runVideo}
-          > 
-            RECORD NAO!
-          </button>
-          <button
-            onClick = {this.runTouch}
-          > 
-            TOUCH NAO!
-          </button>
+      <BrowserRouter>
 
-        </header>
-      </div>
+        <div className="App">
+          <Sidebar/>
+          <Route path='/' exact component={Home} />
+          <Route path='/actions' exact component={Action} />
+          <Route path='/tts' exact component={TTS} />
+          <StatusBar/>
+        </div>
+
+      </BrowserRouter>
     );
   }
 }

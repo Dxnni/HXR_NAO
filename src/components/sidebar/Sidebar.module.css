@@ -1,0 +1,36 @@
+#sidebar {
+    width: 98px;
+    height: 100vh;
+    background-color: #EDEDED;
+    display: flex;
+}
+
+#logo {
+    height: 98px;
+    width: 98px;
+    margin-top: 32px;
+    position: absolute;
+}
+
+#logo img {
+    width: 40px;
+}
+
+#buttons {
+    align-self: center;
+}
+
+#text_input,
+#actions {
+    height: 98px;
+    width: 98px;
+    background-color: rgb(192, 192, 192);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#text_input img,
+#actions img {
+    height: 40px;
+}

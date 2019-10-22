@@ -11,7 +11,7 @@ class PythonNAO {
     if(text){
       console.log('Main: Requesting Python for tts: '+text);
 
-      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
+      const full_path = '/Users/alexander/Documents/dev/electron-react-boilerplate-1/scripts/';
       PythonShell.run(full_path+'tts.py', {args:[text]}, (err, output) => {
           if (err) throw err;
           console.log('Main: Successfully ran tts.py:\n'+output);
@@ -23,7 +23,7 @@ class PythonNAO {
     if(post){
       console.log('Main: Requesting Python to change posture: '+post);
 
-      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
+      const full_path = '/Users/alexander/Documents/dev/electron-react-boilerplate-1/scripts/';
       PythonShell.run(full_path+'posture.py', {args:[post]}, (err, output) => {
           if (err) throw err;
           console.log('Main: Successfully ran posture.py:\n'+output);
@@ -37,7 +37,7 @@ class PythonNAO {
       if((scriptName === 'move') || (scriptName === 'sonar') || (scriptName === 'touch') || (scriptName === 'video')){
         console.log('Main: Requesting Python to run script: '+scriptName);
 
-        const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
+        const full_path = '/Users/alexander/Documents/dev/electron-react-boilerplate-1/scripts/';
         PythonShell.run(full_path+scriptName+'.py', null, (err, output) => {
             if (err) throw err;
             console.log('Main: Successfully ran '+scriptName+'.py:\n'+output);
