@@ -1,0 +1,74 @@
+#statusbar {
+    width: 20vw;
+    height: 100vh;
+    background-color: rgb(189, 189, 189);
+}
+
+#top {
+    width: 100%;
+    height: 40vh;
+    max-height: 300px;
+    background-color: rgb(236, 236, 236);
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: center;
+    align-items: center; */
+
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "battery"
+    "status_code";
+    /* width: 100%; */
+}
+
+#battery {
+    grid-area: battery;
+    /* background-color: red; */
+}
+
+#battery_content {
+    display: flex;
+    align-items: center;
+    float: right;
+    margin-right: 16px;
+}
+
+#battery img {
+    width: 32px;
+    margin-left: 16px;
+}
+
+#status_code {
+    grid-area: status_code;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: rgb(255, 251, 0); */
+}
+
+#status_code p {
+    margin: 0 auto;
+}
+
+#status_code p:first-of-type {
+    font-size: 80px;
+}
+
+
+#bottom button {
+    width: 150px;
+    height: 35px;
+    margin-top: 32px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    background-color: transparent;
+}
+
+
