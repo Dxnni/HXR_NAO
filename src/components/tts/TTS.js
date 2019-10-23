@@ -24,6 +24,8 @@ class TTS extends Component {
         return (
             <div id={styles.tts_container}>
 
+                <h3>Text To Speech</h3>
+
                 <input 
                     type="text"
                     name="inputText"

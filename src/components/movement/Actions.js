@@ -4,6 +4,10 @@ import ElectronNAO from '../../ElectronNAO';
 import Action from './action/Action';
 import styles from './Actions.module.css';
 
+import stand_icon from '../../assets/icons/postures/stand.svg';
+import crouch_icon from '../../assets/icons/postures/crouch.svg';
+import lying_back_icon from '../../assets/icons/postures/lying.svg';
+
 class Actions extends Component {
 
     state = {
@@ -36,47 +40,55 @@ class Actions extends Component {
 
     render(){
         return (
-            <div id={styles.action_header} >
+            <div id={styles.actions} >
 
                 <h1>ACTIONS</h1>
 
                 <div id={styles.action_container} >
-
-                    <button
+                    <div
                         id={styles.action}
                         onClick={this.standInit}
                     >
-                        <Action/>
-                    </button>
+                        <img src={stand_icon}/>
+                        <p>Stand Init</p>
+                    </div>
 
-                    <button
+                    <div
                         id={styles.action}
                         onClick={this.crouch}
                     >
-                        <Action/>
-                    </button>
+                        <img src={crouch_icon}/>
+                        <p>Crouch</p>
+                    </div>
 
-                    <button
+                    <div
                         id={styles.action}
                         onClick={this.lyingBack}
                     >
-                        <Action/>
-                    </button>
+                        <img src={lying_back_icon}/>
+                        <p>Lying Back</p>
+                    </div>
+                </div>
 
-                    <input 
-                        type="text"
-                        name="steps"
-                        id={styles.tts_input} 
-                        value={ this.state.steps }
-                        onChange={ this.stepsChangeHandler }
-                    />
+                <div id={styles.move}>
+                    <p>Move Foward</p>
 
-                    <button 
-                        id={styles.button}
-                        onClick = {this.move}
-                    > 
-                        SEND 
-                    </button>
+                    <div id={styles.move_content}>
+                        {/* <input 
+                            type="text"
+                            name="steps"
+                            id={styles.tts_input} 
+                            value={ this.state.steps }
+                            onChange={ this.stepsChangeHandler }
+                        /> */}
+
+                        <button 
+                            id={styles.button}
+                            onClick = {this.move}
+                        > 
+                            MOVE
+                        </button>
+                    </div>
 
                 </div>
             </div>

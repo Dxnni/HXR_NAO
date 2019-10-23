@@ -27,18 +27,20 @@ class sidebar extends Component {
                             <p>80%</p>
                             <img src={battery_icon}/>                   
                         </div>
-    
-                        <button
-                            onClick = {this.runTouch}
-                        >
-                            Switch
-                        </button>
                     </div>
     
                     <div id={styles.status_code}>
                         <p>80</p>
                         <p>NAO Sensor Data</p>
                     </div>            
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.runTouch}
+                        >
+                            ENABLE TOUCH
+                    </button>
                 </div>
     
             </div>

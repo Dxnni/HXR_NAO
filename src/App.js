@@ -21,11 +21,21 @@ class App extends Component {
       <BrowserRouter>
 
         <div className="App">
-          <Sidebar/>
-          <Route path='/' exact component={Home} />
-          <Route path='/actions' exact component={Action} />
-          <Route path='/tts' exact component={TTS} />
-          <StatusBar/>
+
+          <div id="sidebar">
+            <Sidebar/>
+          </div>
+
+          <div id="section">
+            <Route path='/' exact component={TTS} />
+            <Route path='/actions' exact component={Action} />
+            <Route path='/tts' exact component={TTS} />            
+          </div>
+
+          <div id="statusbar">
+            <StatusBar/>
+          </div>
+
         </div>
 
       </BrowserRouter>

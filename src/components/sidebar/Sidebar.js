@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import logo_icon from '../../assets/icons/logo.png';
 import tts_icon from '../../assets/icons/tts.svg';
@@ -11,24 +12,24 @@ const sidebar = () => {
     return (
         <div id={styles.sidebar}>
 
-            <a href="/">
+            <Link to = "/">
                 <div id={styles.logo}>
                     <img src={logo_icon}/>
                 </div>
-            </a>
+            </Link>
 
             <div id={styles.buttons}>
-                <a href="/tts">
+                <Link to = "/tts">
                     <div id={styles.text_input}>
                         <img src={tts_icon}/>
                     </div>
-                </a>
+                </Link>
 
-                <a href="/actions">
+                <Link to = "/actions">
                     <div id={styles.actions}>
                         <img src={action_icon}/>
                     </div>
-                </a>
+                </Link>
             </div>
 
         </div>
