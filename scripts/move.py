@@ -30,8 +30,8 @@ motion.moveInit()
 #moveToward(-1->1 for forward speed, -1->1 for left speed, -1->1 for counter clockwise speed, config?)
 #motion.moveToward(sys.argv[1], sys.argv[2], sys.argv[3])
 motion.moveToward(0.5,0,0)
-#2 second delay before next command
-time.sleep(2.0)
+#5 second delay before next command
+time.sleep(5.0)
 
 
 #Done Moving:
