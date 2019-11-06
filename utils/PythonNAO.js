@@ -1,4 +1,6 @@
+//const electron = require('electron');
 const { PythonShell } = require('python-shell');
+//const { ipcMain } = electron;
 
 class PythonNAO {
 
@@ -31,7 +33,7 @@ class PythonNAO {
     }
   }
 
-  static runScript(scriptName){
+  static runScript(scriptName, sender){
     let result = [];
     if(scriptName){
       if((scriptName === 'move') || (scriptName === 'sonar') || (scriptName === 'touch') || (scriptName === 'video')){
@@ -42,6 +44,8 @@ class PythonNAO {
             if (err) throw err;
             console.log('Main: Successfully ran '+scriptName+'.py:\n'+output);
             result = output;
+            //ipcMain.send('req-script-output', output);
+            sender.send('req-script-output', output);
         });
       }
     }

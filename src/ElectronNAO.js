@@ -26,6 +26,7 @@ export default class ElectronNAO {
 
             window.ipcRenderer.on('req-script-output', (event, output) => {
                 if(output){
+                    console.log('E-FEEDBACK FROM MAIN!:\n', output);
                     return output;
                 }
             })

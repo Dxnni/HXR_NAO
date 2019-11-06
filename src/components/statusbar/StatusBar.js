@@ -15,6 +15,18 @@ class sidebar extends Component {
         let output = ElectronNAO.runScript(script);
         console.log('Output from script', script+'.py:\n', output);
     }
+
+    runUltrasound = () => {
+        let script = 'sonar';
+        let output = ElectronNAO.runScript(script);
+        //console.log('Output from script', script+'.py:\n', output);
+    }
+
+    runVideo = () => {
+        let script = 'video';
+        let output = ElectronNAO.runScript(script);
+        //console.log('Output from script', script+'.py:\n', output);
+    }
     
     render() {
         return (
@@ -40,6 +52,22 @@ class sidebar extends Component {
                             onClick = {this.runTouch}
                         >
                             ENABLE TOUCH
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.runUltrasound}
+                        >
+                            GET ULTRASOUND
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.runVideo}
+                        >
+                            GET VIDEO
                     </button>
                 </div>
     
