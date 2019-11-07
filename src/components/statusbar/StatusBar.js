@@ -13,21 +13,25 @@ class sidebar extends Component {
     constructor(props){
         super(props);
         this.state = {            
-            sonar: 0,
+            sonarL: 0,
+            sonarR: 0,
             recordedFrames: 0,
             battery: 80
         };
     }
 
     sonarUpdate = (val) => {
+        console.log('React: Output from sonar script:\n', val);
         this.setState({
-            sonar: val
+            sonarL: val[0],
+            sonarR: val[1]
         });
     }
 
     recordUpdate = (val) => {
+        console.log('React: Output from recording script:\n', val);
         this.setState({
-            recordedFrames: val
+            recordedFrames: val[1]+val[2]
         });
     }
 
@@ -39,13 +43,11 @@ class sidebar extends Component {
     }
 
     getSonar = () => {
-        let output = ElectronNAO.getSonar(this.sonarUpdate);
-        console.log('React: Output from sonar script:\n', output);
+        ElectronNAO.getSonar(this.sonarUpdate);
     }
 
     getRecording = () => {
-        let output = ElectronNAO.getRecording(this.recordUpdate);
-        console.log('React: Output from recording script:\n', output);
+        ElectronNAO.getRecording(this.recordUpdate);
     }
 
     // TODO: create getBattery
@@ -64,8 +66,9 @@ class sidebar extends Component {
                         </div>
                     </div>
     
-                    <div id={styles.status_code}>
-                        <p>{this.state.sonar}</p>
+                    <div>
+                        <p>{this.state.sonarL}</p>
+                        <p>{this.state.sonarR}</p>
                         <p>NAO Sonar Data</p>
 
                         <p>{this.state.recordedFrames}</p>

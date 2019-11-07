@@ -4,6 +4,7 @@ const { PythonShell } = require('python-shell');
 class PythonNAO {
 
   //TODO: replace hardcoded full_path to be relative
+  //TODO: take IP input for all scripts
   //URGENT: robot will move perfectly on first connection to app, but move improperly and FALL on subsequent connections of app
 
   static textToSpeech(text){

@@ -39,8 +39,11 @@ export default class ElectronNAO {
             window.ipcRenderer.on('req-sonar-output', (event, output) => {
                 if(output){
                     console.log('ElectronNAO: Sonar results from PythonNAO:\n', output);
-                    callback(output[0]);
-                    return output;
+                    // parsing through script results for desired values
+                    let len = output.length;
+                    let result = [output[len-2], output[len-1]];
+                    callback(result);
+                    return result;
                 }
             });
         }
@@ -54,8 +57,11 @@ export default class ElectronNAO {
             window.ipcRenderer.on('req-record-output', (event, output) => {
                 if(output){
                     console.log('ElectronNAO: Recording results from PythonNAO:\n', output);
-                    callback(output[0]);
-                    return output;
+                    // parsing through script results for desired values
+                    let len = output.length;
+                    let result = output[len-1];
+                    callback(result);
+                    return result;
                 }
             });
         }
