@@ -32,10 +32,9 @@ class Actions extends Component {
         });
     }
     
-    move = () => {
-        let script = 'move';
-        let output = ElectronNAO.runScript(script);
-        console.log('Output from script', script+'.py:\n', output);    
+    walk = () => {
+        let secs = 5;
+        ElectronNAO.walk(secs);
     }
 
     render(){
@@ -71,7 +70,7 @@ class Actions extends Component {
                 </div>
 
                 <div id={styles.move}>
-                    <p>Move Foward</p>
+                    <p>Walk Foward</p>
 
                     <div id={styles.move_content}>
                         {/* <input 
@@ -84,9 +83,9 @@ class Actions extends Component {
 
                         <button 
                             id={styles.button}
-                            onClick = {this.move}
+                            onClick = {this.walk}
                         > 
-                            MOVE
+                            WALK
                         </button>
                     </div>
 

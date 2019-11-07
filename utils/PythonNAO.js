@@ -1,56 +1,88 @@
-//const electron = require('electron');
 const { PythonShell } = require('python-shell');
-//const { ipcMain } = electron;
 
+// PythonNAO is the facade for electron.js to use the python scripts by calling provided functions.
 class PythonNAO {
 
   //TODO: replace hardcoded full_path to be relative
-  //URGENT: robot will move perfectly on first connection to app, but move improperly and fall on subsequent connections of app
-
-  script_path = '../scripts/';
+  //URGENT: robot will move perfectly on first connection to app, but move improperly and FALL on subsequent connections of app
 
   static textToSpeech(text){
     if(text){
-      console.log('Main: Requesting Python for tts: '+text);
+      console.log('PythonNAO: Requesting Python for tts: '+text);
 
       const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
       PythonShell.run(full_path+'tts.py', {args:[text]}, (err, output) => {
           if (err) throw err;
-          console.log('Main: Successfully ran tts.py:\n'+output);
+          console.log('PythonNAO: Successfully ran tts.py:\n'+output);
       });
     }   
   }
 
   static goToPost(post){
     if(post){
-      console.log('Main: Requesting Python to change posture: '+post);
+      console.log('PythonNAO: Requesting Python to change posture: '+post);
 
       const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
       PythonShell.run(full_path+'posture.py', {args:[post]}, (err, output) => {
           if (err) throw err;
-          console.log('Main: Successfully ran posture.py:\n'+output);
+          console.log('PythonNAO: Successfully ran posture.py:\n'+output);
       });
     }
   }
 
-  static runScript(scriptName, sender){
-    let result = [];
-    if(scriptName){
-      if((scriptName === 'move') || (scriptName === 'sonar') || (scriptName === 'touch') || (scriptName === 'video')){
-        console.log('Main: Requesting Python to run script: '+scriptName);
+  static walk(secs){
+    if(secs){
+      console.log('PythonNAO: Requesting Python to walk: '+secs+' secs');
 
-        const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
-        PythonShell.run(full_path+scriptName+'.py', null, (err, output) => {
-            if (err) throw err;
-            console.log('Main: Successfully ran '+scriptName+'.py:\n'+output);
-            result = output;
-            //ipcMain.send('req-script-output', output);
-            sender.send('req-script-output', output);
-        });
-      }
+      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
+      PythonShell.run(full_path+'walk.py', {args:[secs]}, (err, output) => {
+          if (err) throw err;
+          console.log('PythonNAO: Successfully ran walk.py:\n'+output);
+      });
     }
-    return result;
   }
+
+  static enableTouch(secs){
+    if(secs){
+      console.log('PythonNAO: Requesting Python to enable touch: '+secs+' secs');
+
+      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
+      // TODO: add input (input is secs) to touch.py script and figure out how to disable touch.py script.
+      PythonShell.run(full_path+'touch.py', {args:[]}, (err, output) => {
+          if (err) throw err;
+          console.log('PythonNAO: Successfully ran touch.py:\n'+output);
+      });
+    }
+  }
+
+  static getSonar(sender){
+    if(sender){
+      console.log('PythonNAO: Requesting Python to get sonar values');
+
+      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
+      PythonShell.run(full_path+'sonar.py', {args:[]}, (err, output) => {
+          if (err) throw err;
+          console.log('PythonNAO: Successfully ran sonar.py:\n'+output);
+          sender.send('req-sonar-output', output);
+      });
+    }
+  }
+
+  static getRecording(sender){
+    if(sender){
+      console.log('PythonNAO: Requesting Python to get recording');
+
+      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
+      PythonShell.run(full_path+'record.py', {args:[]}, (err, output) => {
+          if (err) throw err;
+          console.log('PythonNAO: Successfully ran record.py:\n'+output);
+          sender.send('req-record-output', output);
+      });
+    }
+  }  
+
+  // TODO: create getBattery(sender) and battery.py script
+
 }
 
 module.exports = PythonNAO;

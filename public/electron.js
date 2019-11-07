@@ -34,28 +34,57 @@ function createWindow() {
   });
 }
 
+// Listener for tts functionality
 ipcMain.on('req-tts', (event, text) => {
   if(text){
     PythonNAO.textToSpeech(text);
   }
 });
 
+// Listener for goToPost functionality
 ipcMain.on('req-post', (event, post) => {
   if(post){
     PythonNAO.goToPost(post);
   }
 });
 
-ipcMain.on('req-script', (event, script) => {
-  if(script){
-    //TODO: get output from script in PythonNAO to the UI
-    //TODO: theory-output is always undefined when ran because it doesn't wait for runScript to finish
-    let output = PythonNAO.runScript(script, event.sender);
-    //console.log('Electron.js:', script+'.py output:\n', output);
-    //event.sender.send('req-script-output', output);
-    //ipcMain.send('req-script-output', output);
+// Listener for walking functionality
+ipcMain.on('req-walk', (event, secs) => {
+  if(secs){
+    PythonNAO.walk(secs);
   }
 });
+
+// Listener for touch functionality
+ipcMain.on('req-touch', (event, secs) => {
+  if(secs){
+    PythonNAO.enableTouch(secs);
+  }
+});
+
+// Listener for sonar functionality
+ipcMain.on('req-sonar', (event) => {
+  PythonNAO.getSonar(event.sender);
+});
+
+// Listener for recording functionality
+ipcMain.on('req-record', (event) => {
+  PythonNAO.getRecording(event.sender);
+});
+
+// TODO: create listener for getBattery
+
+// // Listener for script functionality
+// ipcMain.on('req-script', (event, script) => {
+//   if(script){
+//     //TODO: get output from script in PythonNAO to the UI
+//     //TODO: theory-output is always undefined when ran because it doesn't wait for runScript to finish
+//     PythonNAO.runScript(script, event.sender);
+//     //console.log('Electron.js:', script+'.py output:\n', output);
+//     //event.sender.send('req-script-output', output);
+//     //ipcMain.send('req-script-output', output);
+//   }
+// });
 
 app.on('ready', createWindow);
 
