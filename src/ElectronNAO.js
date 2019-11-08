@@ -68,5 +68,19 @@ export default class ElectronNAO {
     }
 
     // TODO: create getBattery(callback)
-
+    static getBattery(callback){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to get battery value');
+            window.ipcRenderer.send('req-battery');
+            
+            window.ipcRenderer.on('req-battery-output', (event, output) => {
+                if(output){
+                    console.log('ElectronNAO: Battery result from PythonNAO:\n', output);
+                    // parsing through script results for desired values
+                    callback(output);
+                    return output;
+                }
+            });
+        }
+    }
 }

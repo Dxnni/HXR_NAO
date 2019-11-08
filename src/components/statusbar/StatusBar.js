@@ -16,7 +16,7 @@ class sidebar extends Component {
             sonarL: 0,
             sonarR: 0,
             recordedFrames: 0,
-            battery: 80
+            battery: 0
         };
     }
 
@@ -36,7 +36,13 @@ class sidebar extends Component {
     }
 
     //TODO: create batteryUpdate(val)
-    
+    batteryUpdate = (val) => {
+        console.log('React: Output from battery script:\n', val);
+        this.setState({
+            battery: val[0]
+        });
+    }
+
     runTouch = () => {
         let secs = 10;
         ElectronNAO.enableTouch(secs);
@@ -51,7 +57,9 @@ class sidebar extends Component {
     }
 
     // TODO: create getBattery
-    
+    getBattery = () => {
+        ElectronNAO.getBattery(this.battery)
+    }
     render() {
         // TODO: call getBattery
         return (
@@ -97,6 +105,14 @@ class sidebar extends Component {
                             onClick = {this.getRecording}
                         >
                             GET RECORDING
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.getBattery}
+                        >
+                            GET BATTERY
                     </button>
                 </div>
     
