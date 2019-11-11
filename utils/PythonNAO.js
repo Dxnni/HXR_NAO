@@ -76,13 +76,16 @@ class PythonNAO {
     }
   }
 
-  static getBattery(){
+  static getBattery(sender){
+    if(sender){
       console.log('PythonNAO: Requesting Python for battery charge');
      
       PythonShell.run('./scripts/'+'battery.py', {args:[]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran battery.py:\n'+output);
+          sender.send('req-battery-output', output);
       });
+    }
   }
 
   // TODO: create getBattery(sender) and battery.py script

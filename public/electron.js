@@ -72,7 +72,7 @@ ipcMain.on('req-record', (event) => {
   PythonNAO.getRecording(event.sender);
 });
 
-// TODO: create listener for getBattery
+// Listener for getBattery
 ipcMain.on('req-battery', (event) => {
   PythonNAO.getBattery(event.sender);
 });

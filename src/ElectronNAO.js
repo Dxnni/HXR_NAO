@@ -76,7 +76,6 @@ export default class ElectronNAO {
             window.ipcRenderer.on('req-battery-output', (event, output) => {
                 if(output){
                     console.log('ElectronNAO: Battery result from PythonNAO:\n', output);
-                    // parsing through script results for desired values
                     callback(output);
                     return output;
                 }

@@ -16,7 +16,7 @@ class sidebar extends Component {
             sonarL: 0,
             sonarR: 0,
             recordedFrames: 0,
-            battery: 0
+            battery: 0,
         };
     }
 
@@ -38,8 +38,10 @@ class sidebar extends Component {
     //TODO: create batteryUpdate(val)
     batteryUpdate = (val) => {
         console.log('React: Output from battery script:\n', val);
+        console.log(val);
+        
         this.setState({
-            battery: val[0]
+            battery: val[3]
         });
     }
 
@@ -58,7 +60,7 @@ class sidebar extends Component {
 
     // TODO: create getBattery
     getBattery = () => {
-        ElectronNAO.getBattery(this.battery)
+        ElectronNAO.getBattery(this.batteryUpdate)
     }
     render() {
         // TODO: call getBattery
