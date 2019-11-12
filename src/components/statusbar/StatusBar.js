@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ElectronNAO from '../../ElectronNAO';
 
-
 import action_icon from '../../assets/icons/action.png'
 
 import styles from './StatusBar.module.css'
@@ -38,7 +37,6 @@ class sidebar extends Component {
     //TODO: create batteryUpdate(val)
     batteryUpdate = (val) => {
         console.log('React: Output from battery script:\n', val);
-        console.log(val);
         
         this.setState({
             battery: val[3]
@@ -60,10 +58,10 @@ class sidebar extends Component {
 
     // TODO: create getBattery
     getBattery = () => {
-        ElectronNAO.getBattery(this.batteryUpdate)
+        ElectronNAO.getBattery(this.batteryUpdate);
     }
+
     render() {
-        // TODO: call getBattery
         return (
             <div id={styles.statusbar}>
     
