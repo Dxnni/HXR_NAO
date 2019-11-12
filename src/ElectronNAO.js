@@ -82,4 +82,25 @@ export default class ElectronNAO {
             });
         }
     }
+
+    static playkonpa(){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to play konpa');
+            window.ipcRenderer.send('req-konpa');            
+        }
+    }
+
+    static stopMusic(){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to stop music');
+            window.ipcRenderer.send('req-stopmusic');            
+        }
+    }
+
+    static chacha(){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to dance chacha');
+            window.ipcRenderer.send('req-chacha');            
+        }
+    }
 }

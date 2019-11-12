@@ -61,6 +61,19 @@ class sidebar extends Component {
         ElectronNAO.getBattery(this.batteryUpdate);
     }
 
+    playkonpa = () => {
+        ElectronNAO.playkonpa();
+    }
+
+    stopMusic = () => {
+        ElectronNAO.stopMusic();
+    }
+
+    chacha = () => {
+        ElectronNAO.chacha();
+    }
+
+
     render() {
         return (
             <div id={styles.statusbar}>
@@ -113,6 +126,30 @@ class sidebar extends Component {
                             onClick = {this.getBattery}
                         >
                             GET BATTERY
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.playkonpa}
+                        >
+                            Play konpa
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.stopMusic}
+                        >
+                            Stop Music
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.chacha}
+                        >
+                            Dance Cha Cha
                     </button>
                 </div>
     

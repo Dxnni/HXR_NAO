@@ -76,6 +76,19 @@ ipcMain.on('req-record', (event) => {
 ipcMain.on('req-battery', (event) => {
   PythonNAO.getBattery(event.sender);
 });
+
+ipcMain.on('req-konpa', (event) => {
+    PythonNAO.playkonpa();
+});
+
+ipcMain.on('req-stopmusic', (event) => {
+  PythonNAO.stopMusic();
+});
+
+ipcMain.on('req-chacha', (event) => {
+  PythonNAO.chacha();
+});
+
 // // Listener for script functionality
 // ipcMain.on('req-script', (event, script) => {
 //   if(script){

@@ -88,6 +88,33 @@ class PythonNAO {
     }
   }
 
+  static playkonpa(){
+    console.log('PythonNAO: Requesting Python to play konpa');
+    
+    PythonShell.run('./scripts/'+'playKonpa.py', {args:[]}, (err, output) => {
+        if (err) throw err;
+        console.log('PythonNAO: Successfully ran playKonpa.py:\n'+output);
+    });
+  }
+
+  static stopMusic(){
+    console.log('PythonNAO: Requesting Python to stop music');
+    
+    PythonShell.run('./scripts/'+'stopmusic.py', {args:[]}, (err, output) => {
+        if (err) throw err;
+        console.log('PythonNAO: Successfully ran stopmusic.py:\n'+output);
+    });
+  }
+
+  static chacha(){
+    console.log('PythonNAO: Requesting Python to dance chacha');
+    
+    PythonShell.run('./scripts/'+'chacha.py', {args:[]}, (err, output) => {
+        if (err) throw err;
+        console.log('PythonNAO: Successfully ran chacha.py:\n'+output);
+    });
+  }
+
   // TODO: create getBattery(sender) and battery.py script
 
 }
