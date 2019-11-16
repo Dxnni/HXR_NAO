@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ElectronNAO from '../../ElectronNAO';
 
+import Switch from "react-switch";
 
 import action_icon from '../../assets/icons/action.png'
 
@@ -16,7 +17,10 @@ class sidebar extends Component {
             sonarL: 0,
             sonarR: 0,
             recordedFrames: 0,
-            battery: 80
+            battery: 80,
+            runTouch: false,
+            getSonar: false,
+            getRecording: false,
         };
     }
 
@@ -36,68 +40,86 @@ class sidebar extends Component {
     }
 
     //TODO: create batteryUpdate(val)
-    
-    runTouch = () => {
+
+    runTouch = (runTouch) => {
         let secs = 10;
         ElectronNAO.enableTouch(secs);
+        this.setState({ runTouch });
     }
 
-    getSonar = () => {
+    getSonar = (getSonar) => {
         ElectronNAO.getSonar(this.sonarUpdate);
+        this.setState({ getSonar });
     }
 
-    getRecording = () => {
+    getRecording = (getRecording) => {
         ElectronNAO.getRecording(this.recordUpdate);
+        this.setState({ getRecording });
     }
 
     // TODO: create getBattery
     
     render() {
         // TODO: call getBattery
+        console.log(this.state.runTouch);
+
         return (
             <div id={styles.statusbar}>
     
                 <div id={styles.top}>
-    
                     <div id={styles.battery}>
-                        <div id={styles.battery_content}>
-                            <p>{this.state.battery}%</p>
-                            <img src={battery_icon}/>                   
-                        </div>
+                        <p>{this.state.battery}%</p>
+                        <img src={battery_icon}/>                   
                     </div>
     
-                    <div>
-                        <p>{this.state.sonarL}</p>
-                        <p>{this.state.sonarR}</p>
-                        <p>NAO Sonar Data</p>
+                    <div id={styles.sensor_data}>
+                        <div className={styles.sonar_data}>
+                            <div>
+                                <p className={styles.data}>{this.state.sonarL}</p>
+                                <p className={styles.data_caption}>Sonar Left Data</p>                            
+                            </div>
 
-                        <p>{this.state.recordedFrames}</p>
-                        <p>NAO Recorded Frames</p>
+                            <div>
+                                <p className={styles.data}>{this.state.sonarR}</p>
+                                <p className={styles.data_caption}>Sonar Right Data</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p className={styles.data}>{this.state.recordedFrames}</p>
+                            <p className={styles.data_caption}>Recorded Frames</p>                            
+                        </div>
                     </div>            
                 </div>
 
                 <div id={styles.bottom}>
-                    <button
-                            onClick = {this.runTouch}
-                        >
+
+                    <div className={styles.switch}>
+                        <p>NABLE TOUCH</p>
+                        <Switch onChange={this.runTouch} checked={this.state.runTouch} />
+                        {/* <button onClick = {this.runTouch}>
                             ENABLE TOUCH
-                    </button>
-                </div>
+                        </button> */}
+                    </div>
+       
+                    <div className={styles.switch}>
+                        <p>GET SONAR</p>
+                        <Switch onChange={this.getSonar} checked={this.state.getSonar} />
 
-                <div id={styles.bottom}>
-                    <button
-                            onClick = {this.getSonar}
-                        >
+                        {/* <button onClick = {this.getSonar}>
                             GET SONAR
-                    </button>
-                </div>
+                        </button> */}
+                    </div>
+           
+                    <div className={styles.switch}>
+                        <p>GET RECORDING</p>
+                        <Switch onChange={this.getRecording} checked={this.state.getRecording} />
 
-                <div id={styles.bottom}>
-                    <button
-                            onClick = {this.getRecording}
-                        >
+                        {/* <button onClick = {this.getRecording}>
                             GET RECORDING
-                    </button>
+                        </button> */}
+                    </div>
+
                 </div>
     
             </div>
