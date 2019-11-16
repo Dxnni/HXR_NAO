@@ -3,16 +3,15 @@ const { PythonShell } = require('python-shell');
 // PythonNAO is the facade for electron.js to use the python scripts by calling provided functions.
 class PythonNAO {
 
-  //TODO: replace hardcoded full_path to be relative
+  //TODO: replace hardcoded './scripts/' to be relative
   //TODO: take IP input for all scripts
   //URGENT: robot will move perfectly on first connection to app, but move improperly and FALL on subsequent connections of app
 
   static textToSpeech(text){
     if(text){
       console.log('PythonNAO: Requesting Python for tts: '+text);
-
-      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
-      PythonShell.run(full_path+'tts.py', {args:[text]}, (err, output) => {
+     
+      PythonShell.run('./scripts/'+'tts.py', {args:['-t'+text]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran tts.py:\n'+output);
       });
@@ -23,8 +22,7 @@ class PythonNAO {
     if(post){
       console.log('PythonNAO: Requesting Python to change posture: '+post);
 
-      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
-      PythonShell.run(full_path+'posture.py', {args:[post]}, (err, output) => {
+      PythonShell.run('./scripts/'+'posture.py', {args:[post]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran posture.py:\n'+output);
       });
@@ -35,8 +33,7 @@ class PythonNAO {
     if(secs){
       console.log('PythonNAO: Requesting Python to walk: '+secs+' secs');
 
-      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
-      PythonShell.run(full_path+'walk.py', {args:[secs]}, (err, output) => {
+      PythonShell.run('./scripts/'+'walk.py', {args:[secs]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran walk.py:\n'+output);
       });
@@ -47,9 +44,8 @@ class PythonNAO {
     if(secs){
       console.log('PythonNAO: Requesting Python to enable touch: '+secs+' secs');
 
-      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
       // TODO: add input (input is secs) to touch.py script and figure out how to disable touch.py script.
-      PythonShell.run(full_path+'touch.py', {args:[]}, (err, output) => {
+      PythonShell.run('./scripts/'+'touch.py', {args:[]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran touch.py:\n'+output);
       });
@@ -60,8 +56,7 @@ class PythonNAO {
     if(sender){
       console.log('PythonNAO: Requesting Python to get sonar values');
 
-      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
-      PythonShell.run(full_path+'sonar.py', {args:[]}, (err, output) => {
+      PythonShell.run('./scripts/'+'sonar.py', {args:[]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran sonar.py:\n'+output);
           sender.send('req-sonar-output', output);
@@ -73,14 +68,52 @@ class PythonNAO {
     if(sender){
       console.log('PythonNAO: Requesting Python to get recording');
 
-      const full_path = 'C:/Users/Bramw/Desktop/Fall19/Research/code/electron-react-boilerplate-1/scripts/';
-      PythonShell.run(full_path+'record.py', {args:[]}, (err, output) => {
+      PythonShell.run('./scripts/'+'record.py', {args:[]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran record.py:\n'+output);
           sender.send('req-record-output', output);
       });
     }
-  }  
+  }
+
+  static getBattery(sender){
+    if(sender){
+      console.log('PythonNAO: Requesting Python for battery charge');
+     
+      PythonShell.run('./scripts/'+'battery.py', {args:[]}, (err, output) => {
+          if (err) throw err;
+          console.log('PythonNAO: Successfully ran battery.py:\n'+output);
+          sender.send('req-battery-output', output);
+      });
+    }
+  }
+
+  static playkonpa(){
+    console.log('PythonNAO: Requesting Python to play konpa');
+    
+    PythonShell.run('./scripts/'+'playKonpa.py', {args:[]}, (err, output) => {
+        if (err) throw err;
+        console.log('PythonNAO: Successfully ran playKonpa.py:\n'+output);
+    });
+  }
+
+  static stopMusic(){
+    console.log('PythonNAO: Requesting Python to stop music');
+    
+    PythonShell.run('./scripts/'+'stopmusic.py', {args:[]}, (err, output) => {
+        if (err) throw err;
+        console.log('PythonNAO: Successfully ran stopmusic.py:\n'+output);
+    });
+  }
+
+  static chacha(){
+    console.log('PythonNAO: Requesting Python to dance chacha');
+    
+    PythonShell.run('./scripts/'+'chacha.py', {args:[]}, (err, output) => {
+        if (err) throw err;
+        console.log('PythonNAO: Successfully ran chacha.py:\n'+output);
+    });
+  }
 
   // TODO: create getBattery(sender) and battery.py script
 

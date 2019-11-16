@@ -1,66 +1,75 @@
 #statusbar {
     width: 20vw;
     height: 100vh;
-    background-color: rgb(189, 189, 189);
+    /* background-color: rgb(189, 189, 189); */
+    box-shadow: -5px 0 5px -2px #E5E9F2;
 }
 
 #top {
-    width: 100%;
-    height: 40vh;
-    max-height: 300px;
     background-color: rgb(236, 236, 236);
-    /* display: flex;
-    flex-direction: column; */
-    /* justify-content: center;
-    align-items: center; */
-
     display: grid;
     grid-template-rows: 1fr 3fr;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-    "battery"
-    "status_code";
-    /* width: 100%; */
+    ". . battery"
+    "status_code status_code status_code";
+}
+
+#top p {
+    margin: 0;
 }
 
 #battery {
-    grid-area: battery;
-    /* background-color: red; */
-}
-
-#battery_content {
     display: flex;
     align-items: center;
-    float: right;
-    margin-right: 16px;
+    float: right; 
+    margin-bottom: 64px;
+    grid-area: battery;
 }
 
 #battery img {
     width: 32px;
     margin-left: 16px;
+    float: right;
+
 }
 
-#status_code {
+#sensor_data {
+    text-align: center;
     grid-area: status_code;
+}
+
+#sensor_data div {
+    margin-bottom: 16px;
+}
+
+.sonar_data {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 164px;
+}
+
+.data {
+    font-size: 40px;
+}
+
+
+
+/* -------------- BOTTOM -------------- */
+#bottom {
+    margin-top: 32px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* background-color: rgb(255, 251, 0); */
+    align-items: center;
 }
 
-#status_code p {
-    margin: 0 auto;
+#bottom div {
+    margin-bottom: 16px;
 }
-
-#status_code p:first-of-type {
-    font-size: 80px;
-}
-
 
 #bottom button {
     width: 150px;
     height: 35px;
-    margin-top: 32px;
     border: 1px solid black;
     border-radius: 10px;
     font-size: 14px;
@@ -71,4 +80,11 @@
     background-color: transparent;
 }
 
+#bottom button:active {
+    box-shadow: 0 0 8px rgb(161, 161, 161);
+}
 
+/* ---- SWITCHES ----- */
+.switch {
+    
+}

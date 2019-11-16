@@ -8,7 +8,7 @@
 
 
 .App {
-  text-align: center;
+  /* text-align: center; */
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 98px 3fr 20vw;

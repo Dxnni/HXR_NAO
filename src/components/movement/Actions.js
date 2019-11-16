@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
 import ElectronNAO from '../../ElectronNAO';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import Action from './action/Action';
 import styles from './Actions.module.css';
+
+
 
 import stand_icon from '../../assets/icons/postures/stand.svg';
 import crouch_icon from '../../assets/icons/postures/crouch.svg';
@@ -31,7 +38,7 @@ class Actions extends Component {
             steps: event.target.value,
         });
     }
-    
+
     walk = () => {
         let secs = 5;
         ElectronNAO.walk(secs);
@@ -43,53 +50,72 @@ class Actions extends Component {
 
                 <h1>ACTIONS</h1>
 
-                <div id={styles.action_container} >
-                    <div
-                        id={styles.action}
-                        onClick={this.standInit}
-                    >
-                        <img src={stand_icon}/>
-                        <p>Stand Init</p>
+                <div id={styles.actions_content} >
+                    <div className={styles.quick_actions}>
+                        {/* <div id={styles.action_container} > */}
+
+                            <div>
+                                <Action
+                                    title="Stand Init"
+                                    icon={stand_icon}
+                                    onClick={this.standInit}
+                                />
+                            </div>
+
+                            <div>
+                                <Action
+                                    title="Crouch"
+                                    icon={crouch_icon}
+                                    onClick={this.crouch}
+                                />
+                            </div>
+                            
+                            <div>
+                                <Action
+                                    title="Lying Back"
+                                    icon={lying_back_icon}
+                                    onClick={this.lyingBack}
+                                />
+                            </div>
+                        {/* </div> */}
                     </div>
 
-                    <div
-                        id={styles.action}
-                        onClick={this.crouch}
-                    >
-                        <img src={crouch_icon}/>
-                        <p>Crouch</p>
-                    </div>
+                    <div className={styles.move}>
 
-                    <div
-                        id={styles.action}
-                        onClick={this.lyingBack}
-                    >
-                        <img src={lying_back_icon}/>
-                        <p>Lying Back</p>
+                        <div className={styles.up}
+                            onClick = {this.walk}
+                        >
+                            <FontAwesomeIcon icon={faArrowUp} size="2x"/>
+                        </div>
+
+                        <div className={styles.right}>
+                            <FontAwesomeIcon icon={faArrowRight} size="2x" />
+                        </div>
+
+                        <div className={styles.down}>
+                            <FontAwesomeIcon icon={faArrowDown} size="2x" />
+                        </div>
+
+                        <div className={styles.left}>
+                            <FontAwesomeIcon icon={faArrowLeft} size="2x" />
+                        </div>
+
                     </div>
                 </div>
-
+{/* 
                 <div id={styles.move}>
-                    <p>Walk Foward</p>
+                    <p>Move Foward</p>
 
                     <div id={styles.move_content}>
-                        {/* <input 
-                            type="text"
-                            name="steps"
-                            id={styles.tts_input} 
-                            value={ this.state.steps }
-                            onChange={ this.stepsChangeHandler }
-                        /> */}
 
                         <button 
                             id={styles.button}
-                            onClick = {this.walk}
+                            onClick = {this.move}
                         > 
-                            WALK
+                            MOVE
                         </button>
                     </div>
-
-                </div>
+                </div> */}
             </div>
         )
     }

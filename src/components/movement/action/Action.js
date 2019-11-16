@@ -5,32 +5,19 @@ import styles from './Action.module.css'
 
 class Action extends Component {
 
-    // standInit = () => {
-    //     ElectronNAO.goToPost('StandInit');
-    // }
-
-    // crouch = () => {
-    //     ElectronNAO.goToPost('Crouch');
-    // }
-
-    // lyingBack = () => {
-    //     ElectronNAO.goToPost('LyingBack');
-    // }
-
-    onClick(event) {
-        const value = event.target.value;
-        this.props.onSubmit(value);
-    }
-
     render() {
         return (
 
-            <button 
+            <div
                 id={styles.action}
+                onClick={this.props.onClick}
             >
-                {/* <img src={logo_icon}/> */}
-                <p>YOOO oOO pO B HDH</p>
-            </button>
+                <div className={styles.icon}>
+                    <img src={this.props.icon}/>
+                </div>
+
+                <p>{this.props.title}</p>
+            </div>
     
         )
     }
