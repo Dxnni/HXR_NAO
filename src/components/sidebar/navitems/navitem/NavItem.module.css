@@ -1,0 +1,25 @@
+.navItem {
+    padding: 1px 0;
+}
+
+.navItem a {
+    text-decoration: none;
+}
+
+.navItem .content {
+    margin: 16px auto;
+}
+
+#logo img {
+    width: 40px;
+}
+
+.navItem p {
+    margin: 8px 0 0 0;
+}
+
+.navItem:hover,
+.navItem:active,
+.navItem .active {
+    background-color: #679CF6;
+}
