@@ -11,7 +11,7 @@ class PythonNAO {
     if(text){
       console.log('PythonNAO: Requesting Python for tts: '+text);
      
-      PythonShell.run('./scripts/'+'tts.py', {args:[text]}, (err, output) => {
+      PythonShell.run('./scripts/'+'tts.py', {args:['-t'+text]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran tts.py:\n'+output);
       });

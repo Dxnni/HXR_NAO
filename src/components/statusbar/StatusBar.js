@@ -39,7 +39,7 @@ class sidebar extends Component {
         console.log('React: Output from battery script:\n', val);
         
         this.setState({
-            battery: val[4]
+            battery: val[val.length-1]
         });
     }
 
