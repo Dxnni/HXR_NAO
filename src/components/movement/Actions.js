@@ -38,11 +38,10 @@ class Actions extends Component {
             steps: event.target.value,
         });
     }
-    
-    move = () => {
-        let script = 'move';
-        let output = ElectronNAO.runScript(script);
-        console.log('Output from script', script+'.py:\n', output);    
+
+    walk = () => {
+        let secs = 5;
+        ElectronNAO.walk(secs);
     }
 
     render(){
@@ -84,7 +83,7 @@ class Actions extends Component {
                     <div className={styles.move}>
 
                         <div className={styles.up}
-                            onClick = {this.move}
+                            onClick = {this.walk}
                         >
                             <FontAwesomeIcon icon={faArrowUp} size="2x"/>
                         </div>
