@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ElectronNAO from '../../ElectronNAO';
 
-
 import action_icon from '../../assets/icons/action.png'
 
 import styles from './StatusBar.module.css'
@@ -16,7 +15,7 @@ class sidebar extends Component {
             sonarL: 0,
             sonarR: 0,
             recordedFrames: 0,
-            battery: 80
+            battery: 0,
         };
     }
 
@@ -36,7 +35,14 @@ class sidebar extends Component {
     }
 
     //TODO: create batteryUpdate(val)
-    
+    batteryUpdate = (val) => {
+        console.log('React: Output from battery script:\n', val);
+        
+        this.setState({
+            battery: val[4]
+        });
+    }
+
     runTouch = () => {
         let secs = 10;
         ElectronNAO.enableTouch(secs);
@@ -51,9 +57,24 @@ class sidebar extends Component {
     }
 
     // TODO: create getBattery
-    
+    getBattery = () => {
+        ElectronNAO.getBattery(this.batteryUpdate);
+    }
+
+    playkonpa = () => {
+        ElectronNAO.playkonpa();
+    }
+
+    stopMusic = () => {
+        ElectronNAO.stopMusic();
+    }
+
+    chacha = () => {
+        ElectronNAO.chacha();
+    }
+
+
     render() {
-        // TODO: call getBattery
         return (
             <div id={styles.statusbar}>
     
@@ -97,6 +118,38 @@ class sidebar extends Component {
                             onClick = {this.getRecording}
                         >
                             GET RECORDING
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.getBattery}
+                        >
+                            GET BATTERY
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.playkonpa}
+                        >
+                            Play konpa
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.stopMusic}
+                        >
+                            Stop Music
+                    </button>
+                </div>
+
+                <div id={styles.bottom}>
+                    <button
+                            onClick = {this.chacha}
+                        >
+                            Dance Cha Cha
                     </button>
                 </div>
     

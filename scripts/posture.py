@@ -8,7 +8,7 @@ if sys.version_info[0] > 2:
 if (len(sys.argv)>1):
     from naoqi import ALProxy
 
-    motion = ALProxy("ALRobotPosture", "10.0.1.133", 9559)
+    motion = ALProxy("ALRobotPosture", "10.0.1.19", 9559)
     
     #goToPosture(postureName, 0-1 for speed)
     motion.goToPosture(sys.argv[1], 0.5)

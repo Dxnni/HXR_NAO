@@ -68,5 +68,39 @@ export default class ElectronNAO {
     }
 
     // TODO: create getBattery(callback)
+    static getBattery(callback){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to get battery value');
+            window.ipcRenderer.send('req-battery');
+            
+            window.ipcRenderer.on('req-battery-output', (event, output) => {
+                if(output){
+                    console.log('ElectronNAO: Battery result from PythonNAO:\n', output);
+                    callback(output);
+                    return output;
+                }
+            });
+        }
+    }
 
+    static playkonpa(){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to play konpa');
+            window.ipcRenderer.send('req-konpa');            
+        }
+    }
+
+    static stopMusic(){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to stop music');
+            window.ipcRenderer.send('req-stopmusic');            
+        }
+    }
+
+    static chacha(){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to dance chacha');
+            window.ipcRenderer.send('req-chacha');            
+        }
+    }
 }
