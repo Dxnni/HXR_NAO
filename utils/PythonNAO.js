@@ -89,28 +89,28 @@ class PythonNAO {
     }
   }
 
-  static playkonpa(){
+  static playkonpa(robotIP){
     console.log('PythonNAO: Requesting Python to play konpa');
     
-    PythonShell.run('./scripts/'+'playKonpa.py', {args:[]}, (err, output) => {
+    PythonShell.run('./scripts/'+'playKonpa.py', {args:[robotIP]}, (err, output) => {
         if (err) throw err;
         console.log('PythonNAO: Successfully ran playKonpa.py:\n'+output);
     });
   }
 
-  static stopMusic(){
+  static stopMusic(robotIP){
     console.log('PythonNAO: Requesting Python to stop music');
     
-    PythonShell.run('./scripts/'+'stopmusic.py', {args:[]}, (err, output) => {
+    PythonShell.run('./scripts/'+'stopmusic.py', {args:[robotIP]}, (err, output) => {
         if (err) throw err;
         console.log('PythonNAO: Successfully ran stopmusic.py:\n'+output);
     });
   }
 
-  static chacha(){
+  static chacha(robotIP){
     console.log('PythonNAO: Requesting Python to dance chacha');
     
-    PythonShell.run('./scripts/'+'chacha.py', {args:[]}, (err, output) => {
+    PythonShell.run('./scripts/'+'chacha.py', {args:[robotIP]}, (err, output) => {
         if (err) throw err;
         console.log('PythonNAO: Successfully ran chacha.py:\n'+output);
     });
