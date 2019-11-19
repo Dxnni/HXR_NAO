@@ -1,8 +1,9 @@
 #!/usr/bin/python2.7
 import sys
 import parse
+from naoqi import ALProxy
 
-parser = parse.get_arg_parser()
+parser = parse.get_tts_parser()
 args = parser.parse_args()
 print(args.text,args.volume,args.pitch,args.speed,args.ip)
 
@@ -11,7 +12,6 @@ if sys.version_info[0] > 2:
 
 
 if args.text:
-    from naoqi import ALProxy
 
     tts = ALProxy("ALTextToSpeech", args.ip, 9559)
     

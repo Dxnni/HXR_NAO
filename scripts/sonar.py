@@ -1,14 +1,17 @@
 #!/usr/bin/python2.7
 import sys
+import parse
+
+from naoqi import ALProxy
 
 if sys.version_info[0] > 2:
     raise Exception("Python 2 is required.")
 
+parser = parse.get_base_parser()
+args= parser.parse_args()
 
-from naoqi import ALProxy
-
-memory = ALProxy("ALMemory", "10.0.1.19", 9559)
-sonar = ALProxy("ALSonar", "10.0.1.19", 9559)
+memory = ALProxy("ALMemory", args.ip, 9559)
+sonar = ALProxy("ALSonar",args.ip, 9559)
 
 #starts ultrasonic sensor
 sonar.subscribe("myApplication")

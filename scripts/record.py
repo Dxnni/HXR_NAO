@@ -1,14 +1,16 @@
 #!/usr/bin/python2.7
 import sys
 import time
+from naoqi import ALProxy
+import parse
 
 if sys.version_info[0] > 2:
     raise Exception("Python 2 is required.")
 
+parser = parse.get_base_parser()
+args= parser.parse_args()
 
-from naoqi import ALProxy
-
-vid = ALProxy("ALVideoRecorder", "10.0.1.19", 9559)
+vid = ALProxy("ALVideoRecorder", args.ip, 9559)
 
 #startRecording(folderPath, fileName)
 vid.startRecording("/home/nao/recordings/cameras","testVidFeed")

@@ -1,16 +1,21 @@
 #!/usr/bin/python2.7
 import sys
 import time
+from naoqi import ALProxy
+import parse 
+
 
 if sys.version_info[0] > 2:
     raise Exception("Python 2 is required.")
 
 
 #if (len(sys.argv)>4):
-from naoqi import ALProxy
 
-posture = ALProxy("ALRobotPosture", "10.0.1.19", 9559)
-motion = ALProxy("ALMotion", "10.0.1.19", 9559)
+parser = parse.get_base_parser()
+args = parser.parse_args()
+
+posture = ALProxy("ALRobotPosture", args.ip, 9559)
+motion = ALProxy("ALMotion", args.ip, 9559)
 
 
 #Setting Up movement:

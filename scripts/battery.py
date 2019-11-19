@@ -10,6 +10,6 @@ import parse
 parser = parse.get_base_parser()
 args = parser.parse_args()
 
-if args.ip:
-    battery = ALProxy("ALBattery", args.ip, 9559)
-    print(battery.getBatteryCharge())
+
+battery = ALProxy("ALBattery", args.ip, 9559)
+print(battery.getBatteryCharge())
