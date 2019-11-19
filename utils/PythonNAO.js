@@ -7,56 +7,57 @@ class PythonNAO {
   //TODO: take IP input for all scripts
   //URGENT: robot will move perfectly on first connection to app, but move improperly and FALL on subsequent connections of app
 
-  static textToSpeech(text){
+  static textToSpeech(robotIP, text){
     if(text){
       console.log('PythonNAO: Requesting Python for tts: '+text);
      
-      PythonShell.run('./scripts/'+'tts.py', {args:[text]}, (err, output) => {
+      PythonShell.run('./scripts/'+'tts.py', {args:[robotIP, text]}, (err, output) => {
+
           if (err) throw err;
           console.log('PythonNAO: Successfully ran tts.py:\n'+output);
       });
     }   
   }
 
-  static goToPost(post){
+  static goToPost(robotIP, post){
     if(post){
       console.log('PythonNAO: Requesting Python to change posture: '+post);
 
-      PythonShell.run('./scripts/'+'posture.py', {args:[post]}, (err, output) => {
+      PythonShell.run('./scripts/'+'posture.py', {args:[robotIP, post]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran posture.py:\n'+output);
       });
     }
   }
 
-  static walk(secs){
+  static walk(robotIP, secs){
     if(secs){
       console.log('PythonNAO: Requesting Python to walk: '+secs+' secs');
 
-      PythonShell.run('./scripts/'+'walk.py', {args:[secs]}, (err, output) => {
+      PythonShell.run('./scripts/'+'walk.py', {args:[robotIP, secs]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran walk.py:\n'+output);
       });
     }
   }
 
-  static enableTouch(secs){
+  static enableTouch(robotIP, secs){
     if(secs){
       console.log('PythonNAO: Requesting Python to enable touch: '+secs+' secs');
 
       // TODO: add input (input is secs) to touch.py script and figure out how to disable touch.py script.
-      PythonShell.run('./scripts/'+'touch.py', {args:[]}, (err, output) => {
+      PythonShell.run('./scripts/'+'touch.py', {args:[robotIP]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran touch.py:\n'+output);
       });
     }
   }
 
-  static getSonar(sender){
+  static getSonar(robotIP, sender){
     if(sender){
       console.log('PythonNAO: Requesting Python to get sonar values');
 
-      PythonShell.run('./scripts/'+'sonar.py', {args:[]}, (err, output) => {
+      PythonShell.run('./scripts/'+'sonar.py', {args:[robotIP]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran sonar.py:\n'+output);
           sender.send('req-sonar-output', output);
@@ -64,11 +65,11 @@ class PythonNAO {
     }
   }
 
-  static getRecording(sender){
+  static getRecording(robotIP, sender){
     if(sender){
       console.log('PythonNAO: Requesting Python to get recording');
 
-      PythonShell.run('./scripts/'+'record.py', {args:[]}, (err, output) => {
+      PythonShell.run('./scripts/'+'record.py', {args:[robotIP]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran record.py:\n'+output);
           sender.send('req-record-output', output);
@@ -76,11 +77,11 @@ class PythonNAO {
     }
   }
 
-  static getBattery(sender){
+  static getBattery(robotIP, sender){
     if(sender){
       console.log('PythonNAO: Requesting Python for battery charge');
      
-      PythonShell.run('./scripts/'+'battery.py', {args:[]}, (err, output) => {
+      PythonShell.run('./scripts/'+'battery.py', {args:[robotIP]}, (err, output) => {
           if (err) throw err;
           console.log('PythonNAO: Successfully ran battery.py:\n'+output);
           sender.send('req-battery-output', output);

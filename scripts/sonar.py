@@ -7,8 +7,12 @@ if sys.version_info[0] > 2:
 
 from naoqi import ALProxy
 
-memory = ALProxy("ALMemory", "10.0.1.19", 9559)
-sonar = ALProxy("ALSonar", "10.0.1.19", 9559)
+robotIP = "10.0.1.19"
+if argv[1]
+    robotIP = argv[1]
+
+memory = ALProxy("ALMemory", robotIP, 9559)
+sonar = ALProxy("ALSonar", robotIP, 9559)
 
 #starts ultrasonic sensor
 sonar.subscribe("myApplication")

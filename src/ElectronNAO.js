@@ -3,38 +3,38 @@ import isElectron from "is-electron";
 // ElectronNAO is the facade for App.js/React to make requests to electron by calling provided functions.
 export default class ElectronNAO {
 
-    static textToSpeech(text){        
+    static textToSpeech(robotIP, text){        
         if(isElectron() && text){            
             console.log('ElectronNAO: Requesting Main for tts: '+text);
-            window.ipcRenderer.send('req-tts', text);            
+            window.ipcRenderer.send('req-tts', robotIP,  text);            
         }
     }
 
-    static goToPost(post){        
+    static goToPost(robotIP, post){        
         if(isElectron() && post){
             console.log('ElectronNAO: Requesting Main to change posture: '+post);
-            window.ipcRenderer.send('req-post', post);
+            window.ipcRenderer.send('req-post', robotIP, post);
         }
     }
 
-    static walk(secs){        
+    static walk(robotIP, secs){        
         if(isElectron() && secs){            
             console.log('ElectronNAO: Requesting Main to walk: '+secs+' secs');
-            window.ipcRenderer.send('req-walk', secs);            
+            window.ipcRenderer.send('req-walk', robotIP, secs);            
         }
     }
 
-    static enableTouch(secs){        
+    static enableTouch(robotIP, secs){        
         if(isElectron() && secs){            
             console.log('ElectronNAO: Requesting Main to enable touch: '+secs+' secs');
-            window.ipcRenderer.send('req-touch', secs);            
+            window.ipcRenderer.send('req-touch', robotIP, secs);            
         }
     }
 
-    static getSonar(callback){        
+    static getSonar(robotIP, callback){        
         if(isElectron()){            
             console.log('ElectronNAO: Requesting Main to get sonar values');
-            window.ipcRenderer.send('req-sonar');
+            window.ipcRenderer.send('req-sonar', robotIP);
             
             window.ipcRenderer.on('req-sonar-output', (event, output) => {
                 if(output){
@@ -49,10 +49,10 @@ export default class ElectronNAO {
         }
     }
 
-    static getRecording(callback){        
+    static getRecording(robotIP, callback){        
         if(isElectron()){            
             console.log('ElectronNAO: Requesting Main to get recording');
-            window.ipcRenderer.send('req-record');
+            window.ipcRenderer.send('req-record', robotIP);
             
             window.ipcRenderer.on('req-record-output', (event, output) => {
                 if(output){
@@ -68,10 +68,10 @@ export default class ElectronNAO {
     }
 
     // TODO: create getBattery(callback)
-    static getBattery(callback){        
+    static getBattery(robotIP, callback){        
         if(isElectron()){            
             console.log('ElectronNAO: Requesting Main to get battery value');
-            window.ipcRenderer.send('req-battery');
+            window.ipcRenderer.send('req-battery', robotIP);
             
             window.ipcRenderer.on('req-battery-output', (event, output) => {
                 if(output){
@@ -83,24 +83,24 @@ export default class ElectronNAO {
         }
     }
 
-    static playkonpa(){        
+    static playkonpa(robotIP){        
         if(isElectron()){            
             console.log('ElectronNAO: Requesting Main to play konpa');
-            window.ipcRenderer.send('req-konpa');            
+            window.ipcRenderer.send('req-konpa', robotIP);            
         }
     }
 
-    static stopMusic(){        
+    static stopMusic(robotIP){        
         if(isElectron()){            
             console.log('ElectronNAO: Requesting Main to stop music');
-            window.ipcRenderer.send('req-stopmusic');            
+            window.ipcRenderer.send('req-stopmusic', robotIP);            
         }
     }
 
-    static chacha(){        
+    static chacha(robotIP){        
         if(isElectron()){            
             console.log('ElectronNAO: Requesting Main to dance chacha');
-            window.ipcRenderer.send('req-chacha');            
+            window.ipcRenderer.send('req-chacha', robotIP);            
         }
     }
 }

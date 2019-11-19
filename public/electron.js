@@ -35,58 +35,58 @@ function createWindow() {
 }
 
 // Listener for tts functionality
-ipcMain.on('req-tts', (event, text) => {
+ipcMain.on('req-tts', (event, robotIP, text) => {
   if(text){
-    PythonNAO.textToSpeech(text);
+    PythonNAO.textToSpeech(robotIP, text);
   }
 });
 
 // Listener for goToPost functionality
-ipcMain.on('req-post', (event, post) => {
+ipcMain.on('req-post', (event, robotIP, post) => {
   if(post){
-    PythonNAO.goToPost(post);
+    PythonNAO.goToPost(robotIP, post);
   }
 });
 
 // Listener for walking functionality
-ipcMain.on('req-walk', (event, secs) => {
+ipcMain.on('req-walk', (event, robotIP, secs) => {
   if(secs){
-    PythonNAO.walk(secs);
+    PythonNAO.walk(robotIP, secs);
   }
 });
 
 // Listener for touch functionality
-ipcMain.on('req-touch', (event, secs) => {
+ipcMain.on('req-touch', (event, robotIP, secs) => {
   if(secs){
-    PythonNAO.enableTouch(secs);
+    PythonNAO.enableTouch(robotIP, secs);
   }
 });
 
 // Listener for sonar functionality
-ipcMain.on('req-sonar', (event) => {
-  PythonNAO.getSonar(event.sender);
+ipcMain.on('req-sonar', (event, robotIP) => {
+  PythonNAO.getSonar(event.sender, robotIP);
 });
 
 // Listener for recording functionality
-ipcMain.on('req-record', (event) => {
-  PythonNAO.getRecording(event.sender);
+ipcMain.on('req-record', (event, robotIP) => {
+  PythonNAO.getRecording(event.sender, robotIP);
 });
 
 // Listener for getBattery
-ipcMain.on('req-battery', (event) => {
-  PythonNAO.getBattery(event.sender);
+ipcMain.on('req-battery', (event, robotIP) => {
+  PythonNAO.getBattery(event.sender, robotIP);
 });
 
-ipcMain.on('req-konpa', (event) => {
-    PythonNAO.playkonpa();
+ipcMain.on('req-konpa', (event, robotIP) => {
+    PythonNAO.playkonpa(robotIP);
 });
 
-ipcMain.on('req-stopmusic', (event) => {
-  PythonNAO.stopMusic();
+ipcMain.on('req-stopmusic', (event, robotIP) => {
+  PythonNAO.stopMusic(robotIP);
 });
 
-ipcMain.on('req-chacha', (event) => {
-  PythonNAO.chacha();
+ipcMain.on('req-chacha', (event, robotIP) => {
+  PythonNAO.chacha(robotIP);
 });
 
 // // Listener for script functionality

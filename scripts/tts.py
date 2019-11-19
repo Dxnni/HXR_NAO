@@ -7,7 +7,10 @@ if sys.version_info[0] > 2:
 
 if (len(sys.argv)>1):
     from naoqi import ALProxy
+    robotIP = "10.0.1.19"
+    if argv[1]
+        robotIP = argv[1]
 
-    tts = ALProxy("ALTextToSpeech", "10.0.1.19", 9559)
+    tts = ALProxy("ALTextToSpeech", robotIP, 9559)
     
     tts.say(sys.argv[1])

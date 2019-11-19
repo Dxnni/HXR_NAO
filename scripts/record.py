@@ -7,8 +7,11 @@ if sys.version_info[0] > 2:
 
 
 from naoqi import ALProxy
+robotIP = "10.0.1.19"
+if argv[1]
+    robotIP = argv[1]
 
-vid = ALProxy("ALVideoRecorder", "10.0.1.19", 9559)
+vid = ALProxy("ALVideoRecorder", robotIP, 9559)
 
 #startRecording(folderPath, fileName)
 vid.startRecording("/home/nao/recordings/cameras","testVidFeed")
