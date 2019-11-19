@@ -23,4 +23,20 @@
 .navItems {
     list-style: none;
     padding: 0;
+    margin-top: 280px;
+}
+
+.navItems li {
+    text-align: center;
+}
+
+.navItem {
+    width: 98px;
+    padding: 1px 0;
+}
+
+.navItem:hover,
+.navItem:active,
+.navItem .active {
+    background-color: #679CF6;
 }

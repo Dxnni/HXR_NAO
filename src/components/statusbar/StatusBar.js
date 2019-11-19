@@ -117,61 +117,40 @@ class sidebar extends Component {
                     <div className={styles.switch}>
                         <p>NABLE TOUCH</p>
                         <Switch onChange={this.runTouch} checked={this.state.runTouch} />
-                        {/* <button onClick = {this.runTouch}>
-                            ENABLE TOUCH
-                        </button> */}
-                    </div>
-       
-                    <div className={styles.switch}>
-                        <p>GET SONAR</p>
-                        <Switch onChange={this.getSonar} checked={this.state.getSonar} />
-
-                        {/* <button onClick = {this.getSonar}>
-                            GET SONAR
-                        </button> */}
-                    </div>
-           
-                    <div className={styles.switch}>
-                        <p>GET RECORDING</p>
-                        <Switch onChange={this.getRecording} checked={this.state.getRecording} />
-
-                        {/* <button onClick = {this.getRecording}>
-                            GET RECORDING
-                        </button> */}
                     </div>
 
-                </div>
+                    <button onClick = {this.getSonar}>
+                        GET SONAR
+                    </button>
+               
+                    <button onClick = {this.getRecording}>
+                        GET RECORDING
+                    </button>
 
-                <div id={styles.bottom}>
                     <button
                             onClick = {this.getBattery}
                         >
                             GET BATTERY
                     </button>
-                </div>
 
-                <div id={styles.bottom}>
                     <button
                             onClick = {this.playkonpa}
                         >
                             Play konpa
                     </button>
-                </div>
 
-                <div id={styles.bottom}>
                     <button
                             onClick = {this.stopMusic}
                         >
                             Stop Music
                     </button>
-                </div>
 
-                <div id={styles.bottom}>
                     <button
                             onClick = {this.chacha}
                         >
                             Dance Cha Cha
                     </button>
+
                 </div>
     
             </div>
