@@ -7,7 +7,7 @@ import parse
 if sys.version_info[0] > 2:
     raise Exception("Python 2 is required.")
 
-parser = parse.get_base_parser()
+parser = parse.get_full_parser()
 args= parser.parse_args()
 
 vid = ALProxy("ALVideoRecorder", args.ip, 9559)
@@ -15,8 +15,8 @@ vid = ALProxy("ALVideoRecorder", args.ip, 9559)
 #startRecording(folderPath, fileName)
 vid.startRecording("/home/nao/recordings/cameras","testVidFeed")
 
-#5 second delay before next command
-time.sleep(5.0)
+# wait given secs before next command
+time.sleep(args.secs)
 
 #stopRecording(): [num of recorded frames, absolute file path of vid]
 output = vid.stopRecording()

@@ -7,7 +7,7 @@ if sys.version_info[0] > 2:
 from naoqi import ALProxy
 import time
 import parse
-parser = parse.get_base_parser()
+parser = parse.get_full_parser()
 args = parser.parse_args()
 
 

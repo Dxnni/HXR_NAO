@@ -7,7 +7,7 @@ from naoqi import ALProxy
 if sys.version_info[0] > 2:
     raise Exception("Python 2 is required.")
 
-parser = parse.get_base_parser()
+parser = parse.get_full_parser()
 args= parser.parse_args()
 
 memory = ALProxy("ALMemory", args.ip, 9559)
