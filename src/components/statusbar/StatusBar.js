@@ -61,7 +61,7 @@ class sidebar extends Component {
 
     getSonar = (getSonar) => {
         // var roundedSonar = Math.round(getSonar * 100) / 10;
-        ElectronNAO.getSonar(this.sonarUpdate);
+        ElectronNAO.runScript("sonar", [], this.sonarUpdate);
         this.setState({ getSonar });
     }
 

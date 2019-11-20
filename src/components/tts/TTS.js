@@ -10,7 +10,7 @@ class TTS extends Component {
         // let num1 = this.state.num1;
         // let num2 = this.state.num3;
         // let num3 = this.state.num3;
-        ElectronNAO.textToSpeech(text);
+        ElectronNAO.runScript("tts", text, null) ;
     }
 
     ip = () => {
