@@ -21,7 +21,13 @@ class sidebar extends Component {
             runTouch: false,
             getSonar: false,
             getRecording: false,
+            ipValue: null,
         };
+    }
+    
+    handleIpInput = (event) => {
+        this.setState({ipValue: event.target.value});
+        this.props.onIpInput(this.state.ipValue);            
     }
 
     sonarUpdate = (val) => {
@@ -55,6 +61,7 @@ class sidebar extends Component {
     }
 
     getSonar = (getSonar) => {
+        // var roundedSonar = Math.round(getSonar * 100) / 10;
         ElectronNAO.getSonar(this.sonarUpdate);
         this.setState({ getSonar });
     }
@@ -113,6 +120,23 @@ class sidebar extends Component {
                 </div>
 
                 <div id={styles.bottom}>
+
+                {/* <div>
+                    <input 
+                        type="text"
+                        name="inputText"
+                        id={styles.tts_input} 
+                        value={ this.state.ipText}
+                        onChange={ this.ipChangeHandler }
+                    />
+
+                    <button 
+                        id={styles.button}
+                        onClick = {this.ip}
+                    > 
+                        SEND 
+                    </button>
+                </div> */}
 
                     <div className={styles.switch}>
                         <p>NABLE TOUCH</p>

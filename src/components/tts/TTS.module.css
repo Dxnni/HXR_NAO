@@ -1,13 +1,21 @@
-#tts_container {
+#tts_content {
     max-width: 500px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
 
-#tts_container h3 {
-    text-align: center;
-    font-size: 32px;
+#header {
+    height: 100px;
+    width: 100%;
+    overflow: auto;
+    margin-bottom: 64px;
+}
+
+#header h1 {
+    margin: 0;
+    margin-left: 64px;
+    margin-top: 64px;
 }
 
 #tts_input {
@@ -18,6 +26,7 @@
     border: 1px solid rgb(142, 170, 209);
     border-radius: 50px;
     margin-bottom: 32px;
+    padding: 0 16px;
 }
 
 input:focus {

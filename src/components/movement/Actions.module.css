@@ -3,6 +3,7 @@
 }
 
 #actions_content {
+    width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,114 +18,32 @@
     margin-bottom: 32px;
 }
 
-#actions h1 {
-    margin-left: 64px;
+#header {
+    height: 100px;
+    width: 100%;
+    overflow: auto;
     margin-bottom: 64px;
 }
 
+#header h1 {
+    margin: 0;
+    margin-left: 64px;
+    margin-top: 64px;
+}
 
 /* --------- MOVE --------- */
-.move div {
+.moveUp {
     height: 100px;
     width: 100px;
-    border: 1px solid red;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.up {
-    grid-area: up;
-}
-
-.right {
-    grid-area: right;
-}
-
-.down {
-    grid-area: down;
-}
-
-.left {
-    grid-area: left;
-}
-
-.move {
-    width: 300px;
-    height: 300px;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas:
-    ". up ."
-    "left . right"
-    ". down .";
-}
-
-/* #actions {
-    margin: 20% auto 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#action_container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-#action_container img {
-    margin-top: 16px;
-    height: 50px;
-}
-
-#action {
-    width: 60%;
-    max-width: 300px;
-    height: 132px;
-    border: 1px solid black;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
     cursor: pointer;
-    outline: none;
-    background-color: transparent;
-    margin: 32px 32px;
+    border: 1px solid rgb(207, 221, 241);
+    box-shadow: -1px 1px 10px rgb(236, 236, 236);
 }
 
-#button {
-    width: 150px;
-    height: 35px;
-    border: 1px solid black;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    outline: none;
-    background-color: transparent;
-}
-
-#move_content input {
-    width: 32px;
-    height: 40px;
-    display: flex;
-    background-color: transparent;
-    border: 1px solid rgb(142, 170, 209);
-    border-radius: 50px;
-    padding: 0 16px;
-    margin-bottom: 32px;
-    margin-left: 38px;
-}
-
-input:focus {
-    outline: none;
-}
-
-#button:active {
+.moveUp:active {
     box-shadow: 0 0 8px rgb(161, 161, 161);
-} */
+}

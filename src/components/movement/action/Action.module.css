@@ -7,16 +7,7 @@
     border: 1px solid rgb(207, 221, 241);
     box-shadow: -1px 1px 10px rgb(236, 236, 236);
     text-align: center;
-
-    /* border: 1px solid black;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
     cursor: pointer;
-    outline: none;
-    background-color: transparent;
-    margin: 32px 32px; */
 }
 
 .icon {
@@ -37,4 +28,8 @@
 
 #action:focus {
     outline: none;
+}
+
+#action:active {
+    box-shadow: 0 0 8px rgb(161, 161, 161);
 }

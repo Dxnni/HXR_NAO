@@ -23,16 +23,23 @@
 .navItems {
     list-style: none;
     padding: 0;
-    margin-top: 280px;
+    margin-top: 250px;
 }
 
 .navItems li {
     text-align: center;
+    list-style: none;
+    text-decoration: none;
+}
+
+.navItems li p {
+    color: black;
 }
 
 .navItem {
     width: 98px;
     padding: 1px 0;
+    text-decoration: none;
 }
 
 .navItem:hover,

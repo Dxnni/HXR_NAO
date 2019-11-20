@@ -7,6 +7,9 @@ class TTS extends Component {
 
     tts = () => {
         let text = this.state.inputText;
+        let num1 = this.state.num1;
+        let num2 = this.state.num3;
+        let num3 = this.state.num3;
         ElectronNAO.textToSpeech(text);
     }
 
@@ -34,44 +37,63 @@ class TTS extends Component {
     
     render(){
         return (
-            <div id={styles.tts_container}>
+            <div id={styles.tts}>
+                
+                <div id={styles.header}><h1>Text To Speech</h1></div>
 
-                <h3>Text To Speech</h3>
+                <div id={styles.tts_content}>
+                    <form onSubmit={this.tts}> 
+                        <input 
+                            type="text"
+                            name="inputText"
+                            id={styles.tts_input} 
+                            value={ this.state.inputText }
+                            onChange={ this.inputChangeHandler }
+                        />
 
-                <div>
-                    <input 
-                        type="text"
-                        name="inputText"
-                        id={styles.tts_input} 
-                        value={ this.state.inputText }
-                        onChange={ this.inputChangeHandler }
-                    />
+                    {/* <fieldset> */}
+                        {/* <legend>Selecting elements</legend> */}
+                            {/* <p>
+                                <label>Select list</label>
+                                    <select id = "myList">
+                                    <option value = "1">one</option>
+                                    <option value = "2">two</option>
+                                    <option value = "3">three</option>
+                                    <option value = "4">four</option>
+                                    <option value = "5">four</option>
+                                    <option value = "4">four</option>
+                                    <option value = "4">four</option>
+                                    <option value = "4">four</option>
+                                </select>
+                            </p> */}
+                    {/* </fieldset> */}
 
-                    <button 
-                        id={styles.button}
-                        onClick = {this.tts}
-                    > 
-                        SEND 
-                    </button>
+                        <button 
+                            type="submit"
+                            id={styles.button}
+                            // onClick = {this.tts}
+                        > 
+                            SEND 
+                        </button>
+                    </form>
+
+                    <div>
+                        <input 
+                            type="text"
+                            name="inputText"
+                            id={styles.tts_input} 
+                            value={ this.state.ipText}
+                            onChange={ this.ipChangeHandler }
+                        />
+
+                        <button 
+                            id={styles.button}
+                            onClick = {this.ip}
+                        > 
+                            SEND 
+                        </button>
+                    </div>
                 </div>
-
-                <div>
-                    <input 
-                        type="text"
-                        name="inputText"
-                        id={styles.tts_input} 
-                        value={ this.state.ipText}
-                        onChange={ this.ipChangeHandler }
-                    />
-
-                    <button 
-                        id={styles.button}
-                        onClick = {this.ip}
-                    > 
-                        SEND 
-                    </button>
-                </div>
-
             </div>
         )
     }
