@@ -22,7 +22,7 @@ class PythonNAO {
       output: null
     };
 
-    if(this.IP === '0'){
+    if(this.IP === '0' || this.IP === null){
       response.error = 'Error: IP address not set';
       console.log('PythonNAO error:\n', response);
       sender.send('req-'+script+'-output', response);
