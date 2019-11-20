@@ -3,6 +3,48 @@ import isElectron from "is-electron";
 // ElectronNAO is the facade for App.js/React to make requests to electron by calling provided functions.
 export default class ElectronNAO {
 
+    static setIP(newIP){
+        if(isElectron()){
+            console.log('ElectronNAO: Requesting Main to update IP to:', newIP);
+
+            window.ipcRenderer.send('req-IP-update', newIP);            
+        }
+    }
+
+    static runScript(_script, args, callback){        
+        if(isElectron()){
+            
+            let script = _script.toLowerCase();
+
+            console.log('ElectronNAO: Requesting Main to run script:', script);
+
+            let request = {
+                script: script,
+                args: args
+            };
+
+            window.ipcRenderer.send('req-script', request);            
+
+            window.ipcRenderer.on('req-'+script+'-output', (event, _response) => {                               
+                let response = _response;
+
+                if(response.output){
+                    response.output = this.parseOutput(script, response.output);
+                }
+
+                if(response.error){
+                    console.log('ElectronNAO: Error results from PythonNAO:\n', response);
+                }else{
+                    console.log('ElectronNAO: Script results from PythonNAO:\n', response);
+                }
+
+                if(callback){
+                    callback(response);
+                }
+            });
+        }
+    }
+
     static textToSpeech(text){        
         if(isElectron() && text){            
             console.log('ElectronNAO: Requesting Main for tts: '+text);
@@ -24,10 +66,10 @@ export default class ElectronNAO {
         }
     }
 
-    static enableTouch(secs){        
-        if(isElectron() && secs){            
-            console.log('ElectronNAO: Requesting Main to enable touch: '+secs+' secs');
-            window.ipcRenderer.send('req-touch', secs);            
+    static enableTouch(){        
+        if(isElectron()){            
+            console.log('ElectronNAO: Requesting Main to enable touch');
+            window.ipcRenderer.send('req-touch');            
         }
     }
 
@@ -102,5 +144,24 @@ export default class ElectronNAO {
             console.log('ElectronNAO: Requesting Main to dance chacha');
             window.ipcRenderer.send('req-chacha');            
         }
+    }
+
+    static parseOutput(script, output){
+        const arrLen = output.length;
+        let newOutput;
+    
+        switch(script){          
+          case 'sonar' : {
+            newOutput = [output[arrLen-2], output[arrLen-1]];
+            break;
+          }
+          case 'record' : {
+            newOutput = output[arrLen-1];             
+            break;
+          }          
+          default : {
+          }
+        }    
+        return newOutput;
     }
 }

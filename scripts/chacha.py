@@ -7,6 +7,7 @@
 ''' http://www.dancing4beginners.com/cha-cha-steps.htm '''
 import sys
 from naoqi import ALProxy
+import parse
 
 
 def StiffnessOn(proxy):
@@ -81,11 +82,10 @@ def main(robotIP):
 
 
 if __name__ == "__main__":
-    robotIp = "10.0.1.19"
 
-    if len(sys.argv) <= 1:
-        print "Usage python motion_setFootStepDance.py robotIP (optional default: 127.0.0.1)"
-    else:
-        robotIp = sys.argv[1]
+    parser = parse.get_full_parser()
+    args = parser.parse_args()
 
-    main(robotIp)
+    
+    main(args.ip)
+    

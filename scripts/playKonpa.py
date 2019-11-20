@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7
 import sys
 import time
+import parse
 
 if sys.version_info[0] > 2:
     raise Exception("Python 2 is required.")
@@ -8,7 +9,10 @@ if sys.version_info[0] > 2:
 
 from naoqi import ALProxy
 
-audioProxy = ALProxy("ALAudioPlayer", "10.0.1.19", 9559)
+parser = parse.get_full_parser()
+args = parser.parse_args()
 
+
+audioProxy = ALProxy("ALAudioPlayer", args.ip, 9559)
 # audioProxy.playFile(filepath)
 audioProxy.playFile("/var/persistent/home/nao/AudioPlayback/Glise.m4a")

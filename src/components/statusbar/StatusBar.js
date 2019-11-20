@@ -41,11 +41,10 @@ class sidebar extends Component {
     recordUpdate = (val) => {
         console.log('React: Output from recording script:\n', val);
         this.setState({
-            recordedFrames: val[1]+val[2]
+            recordedFrames: val
         });
     }
 
-    //TODO: create batteryUpdate(val)
     batteryUpdate = (val) => {
         console.log('React: Output from battery script:\n', val);
         
@@ -55,8 +54,8 @@ class sidebar extends Component {
     }
 
     runTouch = (runTouch) => {
-        let secs = 10;
-        ElectronNAO.enableTouch(secs);
+        //ElectronNAO.enableTouch();
+        ElectronNAO.runScript('touch', [], null);
         this.setState({ runTouch });
     }
 
@@ -67,25 +66,31 @@ class sidebar extends Component {
     }
 
     getRecording = (getRecording) => {
-        ElectronNAO.getRecording(this.recordUpdate);
+        let secs = 5;
+        //ElectronNAO.getRecording(this.recordUpdate);
+        ElectronNAO.runScript('record', [secs], this.recordUpdate);
         this.setState({ getRecording });
     }
 
     // TODO: create getBattery
     getBattery = () => {
-        ElectronNAO.getBattery(this.batteryUpdate);
+        //ElectronNAO.getBattery(this.batteryUpdate);
+        ElectronNAO.runScript('BATTERY', [], this.batteryUpdate);
     }
 
     playkonpa = () => {
-        ElectronNAO.playkonpa();
+        //ElectronNAO.playkonpa();
+        ElectronNAO.runScript('playKonpa', [], null);
     }
 
     stopMusic = () => {
-        ElectronNAO.stopMusic();
+        //ElectronNAO.stopMusic();
+        ElectronNAO.runScript('stopMusic', [], null);
     }
 
     chacha = () => {
-        ElectronNAO.chacha();
+        //ElectronNAO.chacha();
+        ElectronNAO.runScript('chacha', [], null);
     }
 
 

@@ -63,8 +63,8 @@ class ReactToTouch(object):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ip", type=str, default="10.0.1.19",
-                        help="Robot IP address. On robot or Local Naoqi: use '10.0.1.133'.")
+    parser.add_argument("--ip", type=str,
+                        help="Robot IP address. On robot or Local Naoqi: use '10.0.1.133'.",default="10.0.1.19")
     parser.add_argument("--port", type=int, default=9559,
                         help="Naoqi port number")
 
@@ -79,3 +79,4 @@ if __name__ == "__main__":
         sys.exit(1)
     react_to_touch = ReactToTouch(app)
     app.run()
+    

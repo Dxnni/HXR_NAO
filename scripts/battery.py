@@ -6,6 +6,10 @@ if sys.version_info[0] > 2:
 
 from naoqi import ALProxy
 import time
+import parse
+parser = parse.get_full_parser()
+args = parser.parse_args()
 
-battery = ALProxy("ALBattery", "10.0.1.19", 9559)
+
+battery = ALProxy("ALBattery", args.ip, 9559)
 print(battery.getBatteryCharge())

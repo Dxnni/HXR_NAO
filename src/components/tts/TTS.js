@@ -7,15 +7,15 @@ class TTS extends Component {
 
     tts = () => {
         let text = this.state.inputText;
-        let num1 = this.state.num1;
-        let num2 = this.state.num3;
-        let num3 = this.state.num3;
+        // let num1 = this.state.num1;
+        // let num2 = this.state.num3;
+        // let num3 = this.state.num3;
         ElectronNAO.textToSpeech(text);
     }
 
     ip = () => {
         let text = this.state.ipText;
-        ElectronNAO.textToSpeech(text);
+        ElectronNAO.setIP(text);
     }
 
     state = {
@@ -42,56 +42,46 @@ class TTS extends Component {
                 <div id={styles.header}><h1>Text To Speech</h1></div>
 
                 <div id={styles.tts_content}>
-                    <form onSubmit={this.tts}> 
-                        <input 
-                            type="text"
-                            name="inputText"
-                            id={styles.tts_input} 
-                            value={ this.state.inputText }
-                            onChange={ this.inputChangeHandler }
-                        />
 
-                    {/* <fieldset> */}
-                        {/* <legend>Selecting elements</legend> */}
-                            {/* <p>
-                                <label>Select list</label>
-                                    <select id = "myList">
-                                    <option value = "1">one</option>
-                                    <option value = "2">two</option>
-                                    <option value = "3">three</option>
-                                    <option value = "4">four</option>
-                                    <option value = "5">four</option>
-                                    <option value = "4">four</option>
-                                    <option value = "4">four</option>
-                                    <option value = "4">four</option>
-                                </select>
-                            </p> */}
-                    {/* </fieldset> */}
+                    <div className={styles.input}>
+                        <form onSubmit={this.tts}> 
+                            <input 
+                                type="text"
+                                name="inputText"
+                                id={styles.tts_input} 
+                                value={ this.state.inputText }
+                                onChange={ this.inputChangeHandler }
+                            />
 
-                        <button 
-                            type="submit"
-                            id={styles.button}
-                            // onClick = {this.tts}
-                        > 
-                            SEND 
-                        </button>
-                    </form>
+                            <button 
+                                type="submit"
+                                id={styles.button}
+                                // onClick = {this.tts}
+                            > 
+                                SEND 
+                            </button>
+                        </form>
+                    </div>
 
-                    <div>
-                        <input 
-                            type="text"
-                            name="inputText"
-                            id={styles.tts_input} 
-                            value={ this.state.ipText}
-                            onChange={ this.ipChangeHandler }
-                        />
+                    <div className={styles.input} >
+                        <form onSubmit={this.ip}> 
+                            <input 
+                                type="text"
+                                name="inputText"
+                                id={styles.tts_input} 
+                                value={ this.state.ipText}
+                                onChange={ this.ipChangeHandler}
+                            />
 
-                        <button 
-                            id={styles.button}
-                            onClick = {this.ip}
-                        > 
-                            SEND 
-                        </button>
+                            <button 
+                                type="submit"
+                                id={styles.button}
+                                // onClick = {this.ip}
+                            > 
+                                SEND 
+                            </button>
+                        </form>
+
                     </div>
                 </div>
             </div>
