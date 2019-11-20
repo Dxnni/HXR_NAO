@@ -33,15 +33,15 @@ class sidebar extends Component {
     sonarUpdate = (val) => {
         console.log('React: Output from sonar script:\n', val);
         this.setState({
-            sonarL: val[0],
-            sonarR: val[1]
+            sonarL: val.output[0].substring(0,4),
+            sonarR: val.output[1].substring(0,4)
         });
     }
 
     recordUpdate = (val) => {
         console.log('React: Output from recording script:\n', val);
         this.setState({
-            recordedFrames: val
+            recordedFrames: val.output.substring(1,3)
         });
     }
 
@@ -49,7 +49,7 @@ class sidebar extends Component {
         console.log('React: Output from battery script:\n', val);
         
         this.setState({
-            battery: val[val.length-1]
+            battery: val.output.substring(0,2)
         });
     }
 

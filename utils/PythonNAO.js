@@ -29,6 +29,7 @@ class PythonNAO {
       return;
     }
 
+    // console.log('args:',args);
     const fixedArgs = this.parseArgs(script, args);
 
     console.log('PythonNAO: Running '+script+'.py with args:',fixedArgs);                
@@ -162,30 +163,30 @@ class PythonNAO {
       case 'tts' : {
         if(argLen >= 4){
           //TODO: not have hardcoded order
-          newArgs.unshift('--text');
+          newArgs.splice(0, 0, '--text');
           newArgs.splice(2, 0, '--pitch');
           newArgs.splice(4, 0, '--speed');
           newArgs.splice(6, 0, '--volume');
         }else{
-          newArgs.unshift('--text');
+          newArgs.splice(0, 0, '--text');
         }
         break;
       }
       case 'posture' : {
         if(argLen >= 1){
-          newArgs.unshift('--posture');
+          newArgs.splice(0, 0, '--posture');
         }        
         break;
       }
       case 'walk' : {
         if(argLen >= 1){
-          newArgs.unshift('--secs');
+          newArgs.splice(0, 0, '--secs');
         }
         break;
       }
       case 'record' : {
         if(argLen >= 1){
-          newArgs.unshift('--secs');
+          newArgs.splice(0, 0, '--secs');
         }
         break;
       }
@@ -193,7 +194,7 @@ class PythonNAO {
       }
     }
     
-    newArgs.unshift('--ip', this.IP);
+    newArgs.splice(0, 0, '--ip', this.IP);
 
     return newArgs;
   }

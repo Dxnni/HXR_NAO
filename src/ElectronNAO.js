@@ -109,7 +109,6 @@ export default class ElectronNAO {
         }
     }
 
-    // TODO: create getBattery(callback)
     static getBattery(callback){        
         if(isElectron()){            
             console.log('ElectronNAO: Requesting Main to get battery value');
@@ -156,6 +155,10 @@ export default class ElectronNAO {
             break;
           }
           case 'record' : {
+            newOutput = output[arrLen-1];             
+            break;
+          }
+          case 'battery' : {
             newOutput = output[arrLen-1];             
             break;
           }          
