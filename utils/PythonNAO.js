@@ -5,7 +5,7 @@ class PythonNAO {
   //URGENT: robot will move perfectly on first connection to app, but move improperly and FALL on subsequent connections of app
 
   constructor(){
-    this.IP = '1';
+    this.IP = '0';
     this.scriptsPath = './scripts/';
   }
   
