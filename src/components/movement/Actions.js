@@ -22,15 +22,18 @@ class Actions extends Component {
     }
 
     standInit = () => {
-        ElectronNAO.goToPost('StandInit');
+        // ElectronNAO.goToPost('StandInit');
+        ElectronNAO.runScript('posture', ['StandInit'], null)
     }
 
     crouch = () => {
-        ElectronNAO.goToPost('Crouch');
+        // ElectronNAO.goToPost('Crouch');
+        ElectronNAO.runScript('posture', ['Crouch'], null)
     }
 
     lyingBack = () => {
-        ElectronNAO.goToPost('LyingBack');
+        // ElectronNAO.goToPost('LyingBack');
+        ElectronNAO.runScript('posture', ['LyingBack'], null)
     }
 
     stepsChangeHandler = (event) => {
@@ -41,7 +44,8 @@ class Actions extends Component {
 
     walk = () => {
         let secs = 5;
-        ElectronNAO.walk(secs);
+        // ElectronNAO.walk(secs);
+        ElectronNAO.runScript('walk', [secs], null)
     }
 
     render(){

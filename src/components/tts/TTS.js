@@ -7,7 +7,8 @@ class TTS extends Component {
 
     tts = () => {
         let text = this.state.inputText;
-        ElectronNAO.textToSpeech(text);
+        //ElectronNAO.textToSpeech(text);
+        ElectronNAO.runScript('tts', [text, 1, 50, 1], null);
     }
 
     state = {

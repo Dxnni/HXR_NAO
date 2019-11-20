@@ -2,12 +2,53 @@ const { PythonShell } = require('python-shell');
 
 // PythonNAO is the facade for electron.js to use the python scripts by calling provided functions.
 class PythonNAO {
-
-  //TODO: replace hardcoded './scripts/' to be relative
-  //TODO: take IP input for all scripts
   //URGENT: robot will move perfectly on first connection to app, but move improperly and FALL on subsequent connections of app
 
-  static textToSpeech(text){
+  constructor(){
+    this.IP = '1';
+    this.scriptsPath = './scripts/';
+  }
+  
+  setIP(newIP){
+    console.log('PythonNAO: Updated IP to:', newIP);
+    this.IP = newIP;    
+  }
+
+  runScript(script, args, sender){
+    console.log('PythonNAO: Requesting Python to run script:', script);
+    
+    let response = {
+      error: null,
+      output: null
+    };
+
+    if(this.IP === '0'){
+      response.error = 'Error: IP address not set';
+      console.log('PythonNAO error:\n', response);
+      sender.send('req-'+script+'-output', response);
+      return;
+    }
+
+    const fixedArgs = this.parseArgs(script, args);
+
+    console.log('PythonNAO: Running '+script+'.py with args:',fixedArgs);                
+
+    PythonShell.run(this.scriptsPath+script+'.py', {args:fixedArgs}, (err, output) => {
+
+      response.error = err;
+      response.output = output;
+      
+      if (err){
+        console.log('PythonNAO: Error from '+script+'.py:\n', response);
+      }else{
+        console.log('PythonNAO: Successfully ran '+script+'.py:\n', response);                
+      }  
+      
+      sender.send('req-'+script+'-output', response);
+    });
+  }
+
+  textToSpeech(text){
     if(text){
       console.log('PythonNAO: Requesting Python for tts: '+text);
      
@@ -18,7 +59,7 @@ class PythonNAO {
     }   
   }
 
-  static goToPost(post){
+  goToPost(post){
     if(post){
       console.log('PythonNAO: Requesting Python to change posture: '+post);
 
@@ -29,7 +70,7 @@ class PythonNAO {
     }
   }
 
-  static walk(secs){
+  walk(secs){
     if(secs){
       console.log('PythonNAO: Requesting Python to walk: '+secs+' secs');
 
@@ -40,19 +81,7 @@ class PythonNAO {
     }
   }
 
-  static enableTouch(secs){
-    if(secs){
-      console.log('PythonNAO: Requesting Python to enable touch: '+secs+' secs');
-
-      // TODO: add input (input is secs) to touch.py script and figure out how to disable touch.py script.
-      PythonShell.run('./scripts/'+'touch.py', {args:[]}, (err, output) => {
-          if (err) throw err;
-          console.log('PythonNAO: Successfully ran touch.py:\n'+output);
-      });
-    }
-  }
-
-  static getSonar(sender){
+  getSonar(sender){
     if(sender){
       console.log('PythonNAO: Requesting Python to get sonar values');
 
@@ -64,7 +93,7 @@ class PythonNAO {
     }
   }
 
-  static getRecording(sender){
+  getRecording(sender){
     if(sender){
       console.log('PythonNAO: Requesting Python to get recording');
 
@@ -76,7 +105,7 @@ class PythonNAO {
     }
   }
 
-  static getBattery(sender){
+  getBattery(sender){
     if(sender){
       console.log('PythonNAO: Requesting Python for battery charge');
      
@@ -88,7 +117,17 @@ class PythonNAO {
     }
   }
 
-  static playkonpa(){
+  enableTouch(){
+    console.log('PythonNAO: Requesting Python to enable touch');
+
+    // TODO: add input (input is secs) to touch.py script and figure out how to disable touch.py script.
+    PythonShell.run('./scripts/'+'touch.py', {args:[]}, (err, output) => {
+        if (err) throw err;
+        console.log('PythonNAO: Successfully ran touch.py:\n'+output);
+    });
+  }
+
+  playkonpa(){
     console.log('PythonNAO: Requesting Python to play konpa');
     
     PythonShell.run('./scripts/'+'playKonpa.py', {args:[]}, (err, output) => {
@@ -97,7 +136,7 @@ class PythonNAO {
     });
   }
 
-  static stopMusic(){
+  stopMusic(){
     console.log('PythonNAO: Requesting Python to stop music');
     
     PythonShell.run('./scripts/'+'stopmusic.py', {args:[]}, (err, output) => {
@@ -106,7 +145,7 @@ class PythonNAO {
     });
   }
 
-  static chacha(){
+  chacha(){
     console.log('PythonNAO: Requesting Python to dance chacha');
     
     PythonShell.run('./scripts/'+'chacha.py', {args:[]}, (err, output) => {
@@ -115,8 +154,49 @@ class PythonNAO {
     });
   }
 
-  // TODO: create getBattery(sender) and battery.py script
+  parseArgs(script, args){
+    const argLen = args.length;
+    let newArgs = args;
 
+    switch(script){      
+      case 'tts' : {
+        if(argLen >= 4){
+          //TODO: not have hardcoded order
+          newArgs.unshift('--text');
+          newArgs.splice(2, 0, '--pitch');
+          newArgs.splice(4, 0, '--speed');
+          newArgs.splice(6, 0, '--volume');
+        }else{
+          newArgs.unshift('--text');
+        }
+        break;
+      }
+      case 'posture' : {
+        if(argLen >= 1){
+          newArgs.unshift('--posture');
+        }        
+        break;
+      }
+      case 'walk' : {
+        if(argLen >= 1){
+          newArgs.unshift('--secs');
+        }
+        break;
+      }
+      case 'record' : {
+        if(argLen >= 1){
+          newArgs.unshift('--secs');
+        }
+        break;
+      }
+      default : {
+      }
+    }
+    
+    newArgs.unshift('--ip', this.IP);
+
+    return newArgs;
+  }
 }
 
 module.exports = PythonNAO;

@@ -3,12 +3,13 @@ const path = require('path');
 const url = require('url');
 
 const { ipcMain } = electron;
-const PythonNAO = require('../utils/PythonNAO');
+const _PythonNAO = require('../utils/PythonNAO');
 
 const { app } = electron;
 const { BrowserWindow } = electron;
 
 let mainWindow;
+const PythonNAO = new _PythonNAO();
 
 function createWindow() {
   const startUrl = process.env.DEV
@@ -33,6 +34,16 @@ function createWindow() {
     mainWindow = null;
   });
 }
+
+// Listener to change IP
+ipcMain.on('req-IP-update', (event, newIP) => {  
+  PythonNAO.setIP(newIP);
+});
+
+// Listener for all scripts functionality
+ipcMain.on('req-script', (event, request) => {  
+  PythonNAO.runScript(request.script, request.args, event.sender);
+});
 
 // Listener for tts functionality
 ipcMain.on('req-tts', (event, text) => {
@@ -77,29 +88,20 @@ ipcMain.on('req-battery', (event) => {
   PythonNAO.getBattery(event.sender);
 });
 
+// Listener for konpaMusic
 ipcMain.on('req-konpa', (event) => {
     PythonNAO.playkonpa();
 });
 
+// Listener for stopMusic
 ipcMain.on('req-stopmusic', (event) => {
   PythonNAO.stopMusic();
 });
 
+// Listener for chachaDance
 ipcMain.on('req-chacha', (event) => {
   PythonNAO.chacha();
 });
-
-// // Listener for script functionality
-// ipcMain.on('req-script', (event, script) => {
-//   if(script){
-//     //TODO: get output from script in PythonNAO to the UI
-//     //TODO: theory-output is always undefined when ran because it doesn't wait for runScript to finish
-//     PythonNAO.runScript(script, event.sender);
-//     //console.log('Electron.js:', script+'.py output:\n', output);
-//     //event.sender.send('req-script-output', output);
-//     //ipcMain.send('req-script-output', output);
-//   }
-// });
 
 app.on('ready', createWindow);
 
