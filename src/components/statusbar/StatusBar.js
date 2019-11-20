@@ -121,7 +121,7 @@ class sidebar extends Component {
                 <div id={styles.bottom}>
 
                     <div className={styles.switch}>
-                        <p>NABLE TOUCH</p>
+                        <p>ENABLE TOUCH</p>
                         <Switch onChange={this.runTouch} checked={this.state.runTouch} />
                         {/* <button onClick = {this.runTouch}>
                             ENABLE TOUCH
