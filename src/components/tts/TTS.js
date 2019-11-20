@@ -44,44 +44,39 @@ class TTS extends Component {
                 <div id={styles.tts_content}>
 
                     <div className={styles.input}>
-                        <form onSubmit={this.tts}> 
-                            <input 
-                                type="text"
-                                name="inputText"
-                                id={styles.tts_input} 
-                                value={ this.state.inputText }
-                                onChange={ this.inputChangeHandler }
-                            />
+                        <h3>Speech Input</h3>
+                        <input 
+                            type="text"
+                            name="inputText"
+                            id={styles.tts_input} 
+                            value={ this.state.inputText }
+                            onChange={ this.inputChangeHandler }
+                        />
 
-                            <button 
-                                type="submit"
-                                id={styles.button}
-                                // onClick = {this.tts}
-                            > 
-                                SEND 
-                            </button>
-                        </form>
+                        <button 
+                            id={styles.button}
+                            onClick = {this.tts}
+                        > 
+                            SEND 
+                        </button>
                     </div>
 
-                    <div className={styles.input} >
-                        <form onSubmit={this.ip}> 
-                            <input 
-                                type="text"
-                                name="inputText"
-                                id={styles.tts_input} 
-                                value={ this.state.ipText}
-                                onChange={ this.ipChangeHandler}
-                            />
+                    <div className={styles.input}>
+                        <h3>IP Input</h3>
+                        <input 
+                            type="text"
+                            name="inputText"
+                            id={styles.tts_input} 
+                            value={ this.state.ipText }
+                            onChange={ this.ipChangeHandler }
+                        />
 
-                            <button 
-                                type="submit"
-                                id={styles.button}
-                                // onClick = {this.ip}
-                            > 
-                                SEND 
-                            </button>
-                        </form>
-
+                        <button 
+                            id={styles.button}
+                            onClick = {this.ip}
+                        > 
+                            SEND 
+                        </button>
                     </div>
                 </div>
             </div>
