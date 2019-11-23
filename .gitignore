@@ -24,3 +24,5 @@ yarn-error.log*
 
 *.pyc
 venv/
+/scripts/__pycache__/
+/background_tasks

@@ -32,64 +32,61 @@ class sidebar extends Component {
 
     sonarUpdate = (val) => {
         console.log('React: Output from sonar script:\n', val);
-        this.setState({
-            sonarL: val.output[0].substring(0,4),
-            sonarR: val.output[1].substring(0,4)
-        });
+        if(!val.error){      
+            this.setState({
+                sonarL: val.output.left,
+                sonarR: val.output.right
+            });
+        }
     }
 
     recordUpdate = (val) => {
         console.log('React: Output from recording script:\n', val);
-        this.setState({
-            recordedFrames: val.output.substring(1,3)
-        });
+        if(!val.error){      
+            this.setState({
+                recordedFrames: val.output
+            });
+        }
     }
 
     batteryUpdate = (val) => {
         console.log('React: Output from battery script:\n', val);
-        
-        this.setState({
-            battery: val.output.substring(0,2)
-        });
+        if(!val.error){      
+            this.setState({
+                battery: val.output
+            });
+        }
     }
 
     runTouch = (runTouch) => {
-        //ElectronNAO.enableTouch();
         ElectronNAO.runScript('touch', [], null);
         this.setState({ runTouch });
     }
 
     getSonar = (getSonar) => {
-        // var roundedSonar = Math.round(getSonar * 100) / 10;
         ElectronNAO.runScript("sonar", [], this.sonarUpdate);
         this.setState({ getSonar });
     }
 
     getRecording = (getRecording) => {
         let secs = 5;
-        //ElectronNAO.getRecording(this.recordUpdate);
         ElectronNAO.runScript('record', [secs], this.recordUpdate);
         this.setState({ getRecording });
     }
 
-    // TODO: create getBattery
     getBattery = () => {
-        //ElectronNAO.getBattery(this.batteryUpdate);
         ElectronNAO.runScript('BATTERY', [], this.batteryUpdate);
     }
 
     playkonpa = () => {
-        //ElectronNAO.playkonpa();
         ElectronNAO.runScript('playKonpa', [], null);
     }
 
     stopMusic = () => {
-        //ElectronNAO.stopMusic();
         ElectronNAO.runScript('stopMusic', [], null);
     }
 
     chacha = () => {
-        //ElectronNAO.chacha();
         ElectronNAO.runScript('chacha', [], null);
     }
 
