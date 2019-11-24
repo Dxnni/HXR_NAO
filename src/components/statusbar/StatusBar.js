@@ -21,64 +21,73 @@ class sidebar extends Component {
             runTouch: false,
             getSonar: false,
             getRecording: false,
+            ipValue: null,
         };
+    }
+    
+    handleIpInput = (event) => {
+        this.setState({ipValue: event.target.value});
+        this.props.onIpInput(this.state.ipValue);            
     }
 
     sonarUpdate = (val) => {
         console.log('React: Output from sonar script:\n', val);
-        this.setState({
-            sonarL: val[0],
-            sonarR: val[1]
-        });
+        if(!val.error){      
+            this.setState({
+                sonarL: val.output.left,
+                sonarR: val.output.right
+            });
+        }
     }
 
     recordUpdate = (val) => {
         console.log('React: Output from recording script:\n', val);
-        this.setState({
-            recordedFrames: val[1]+val[2]
-        });
+        if(!val.error){      
+            this.setState({
+                recordedFrames: val.output
+            });
+        }
     }
 
-    //TODO: create batteryUpdate(val)
     batteryUpdate = (val) => {
         console.log('React: Output from battery script:\n', val);
-        
-        this.setState({
-            battery: val[val.length-1]
-        });
+        if(!val.error){      
+            this.setState({
+                battery: val.output
+            });
+        }
     }
 
     runTouch = (runTouch) => {
-        let secs = 10;
-        ElectronNAO.enableTouch(secs);
+        ElectronNAO.runScript('touch', [], null);
         this.setState({ runTouch });
     }
 
     getSonar = (getSonar) => {
-        ElectronNAO.getSonar(this.sonarUpdate);
+        ElectronNAO.runScript("sonar", [], this.sonarUpdate);
         this.setState({ getSonar });
     }
 
     getRecording = (getRecording) => {
-        ElectronNAO.getRecording(this.recordUpdate);
+        let secs = 5;
+        ElectronNAO.runScript('record', [secs], this.recordUpdate);
         this.setState({ getRecording });
     }
 
-    // TODO: create getBattery
     getBattery = () => {
-        ElectronNAO.getBattery(this.batteryUpdate);
+        ElectronNAO.runScript('BATTERY', [], this.batteryUpdate);
     }
 
     playkonpa = () => {
-        ElectronNAO.playkonpa();
+        ElectronNAO.runScript('playKonpa', [], null);
     }
 
     stopMusic = () => {
-        ElectronNAO.stopMusic();
+        ElectronNAO.runScript('stopMusic', [], null);
     }
 
     chacha = () => {
-        ElectronNAO.chacha();
+        ElectronNAO.runScript('chacha', [], null);
     }
 
 
@@ -114,64 +123,60 @@ class sidebar extends Component {
 
                 <div id={styles.bottom}>
 
+                {/* <div>
+                    <input 
+                        type="text"
+                        name="inputText"
+                        id={styles.tts_input} 
+                        value={ this.state.ipText}
+                        onChange={ this.ipChangeHandler }
+                    />
+
+                    <button 
+                        id={styles.button}
+                        onClick = {this.ip}
+                    > 
+                        SEND 
+                    </button>
+                </div> */}
+
                     <div className={styles.switch}>
-                        <p>NABLE TOUCH</p>
+                        <p>ENABLE TOUCH</p>
                         <Switch onChange={this.runTouch} checked={this.state.runTouch} />
-                        {/* <button onClick = {this.runTouch}>
-                            ENABLE TOUCH
-                        </button> */}
-                    </div>
-       
-                    <div className={styles.switch}>
-                        <p>GET SONAR</p>
-                        <Switch onChange={this.getSonar} checked={this.state.getSonar} />
-
-                        {/* <button onClick = {this.getSonar}>
-                            GET SONAR
-                        </button> */}
-                    </div>
-           
-                    <div className={styles.switch}>
-                        <p>GET RECORDING</p>
-                        <Switch onChange={this.getRecording} checked={this.state.getRecording} />
-
-                        {/* <button onClick = {this.getRecording}>
-                            GET RECORDING
-                        </button> */}
                     </div>
 
-                </div>
+                    <button onClick = {this.getSonar}>
+                        GET SONAR
+                    </button>
+               
+                    <button onClick = {this.getRecording}>
+                        GET RECORDING
+                    </button>
 
-                <div id={styles.bottom}>
                     <button
                             onClick = {this.getBattery}
                         >
                             GET BATTERY
                     </button>
-                </div>
 
-                <div id={styles.bottom}>
                     <button
                             onClick = {this.playkonpa}
                         >
                             Play konpa
                     </button>
-                </div>
 
-                <div id={styles.bottom}>
                     <button
                             onClick = {this.stopMusic}
                         >
                             Stop Music
                     </button>
-                </div>
 
-                <div id={styles.bottom}>
                     <button
                             onClick = {this.chacha}
                         >
                             Dance Cha Cha
                     </button>
+
                 </div>
     
             </div>

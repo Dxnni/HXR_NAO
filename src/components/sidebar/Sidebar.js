@@ -32,8 +32,9 @@ const sidebar = () => {
                     >
                         <div className={styles.content}>
                             <img src={tts_icon}/>
-                            <p>TTS</p>
                         </div>
+                        <p>Text To Speech</p>
+
                     </NavLink>
                 </li>
 
@@ -44,7 +45,7 @@ const sidebar = () => {
                     >
                         <div className={styles.content}>
                             <img src={action_icon}/>
-                            <p>ACT</p>
+                            <p>Action</p>
                         </div>
                     </NavLink>
                 </li>

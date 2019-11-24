@@ -22,15 +22,15 @@ class Actions extends Component {
     }
 
     standInit = () => {
-        ElectronNAO.goToPost('StandInit');
+        ElectronNAO.runScript('posture', ['StandInit'], null)
     }
 
     crouch = () => {
-        ElectronNAO.goToPost('Crouch');
+        ElectronNAO.runScript('posture', ['Crouch'], null)
     }
 
     lyingBack = () => {
-        ElectronNAO.goToPost('LyingBack');
+        ElectronNAO.runScript('posture', ['LyingBack'], null)
     }
 
     stepsChangeHandler = (event) => {
@@ -41,19 +41,17 @@ class Actions extends Component {
 
     walk = () => {
         let secs = 5;
-        ElectronNAO.walk(secs);
+        ElectronNAO.runScript('walk', [secs], null)
     }
 
     render(){
         return (
             <div id={styles.actions} >
 
-                <h1>ACTIONS</h1>
+                <div id={styles.header}><h1>ACTIONS</h1></div>
 
                 <div id={styles.actions_content} >
                     <div className={styles.quick_actions}>
-                        {/* <div id={styles.action_container} > */}
-
                             <div>
                                 <Action
                                     title="Stand Init"
@@ -77,45 +75,20 @@ class Actions extends Component {
                                     onClick={this.lyingBack}
                                 />
                             </div>
-                        {/* </div> */}
                     </div>
 
                     <div className={styles.move}>
-
-                        <div className={styles.up}
+                        <div className={styles.moveUp}
                             onClick = {this.walk}
                         >
                             <FontAwesomeIcon icon={faArrowUp} size="2x"/>
                         </div>
-
-                        <div className={styles.right}>
-                            <FontAwesomeIcon icon={faArrowRight} size="2x" />
-                        </div>
-
-                        <div className={styles.down}>
-                            <FontAwesomeIcon icon={faArrowDown} size="2x" />
-                        </div>
-
-                        <div className={styles.left}>
-                            <FontAwesomeIcon icon={faArrowLeft} size="2x" />
-                        </div>
-
+                        <p>Move Forward</p>
                     </div>
+
+
                 </div>
-{/* 
-                <div id={styles.move}>
-                    <p>Move Foward</p>
 
-                    <div id={styles.move_content}>
-
-                        <button 
-                            id={styles.button}
-                            onClick = {this.move}
-                        > 
-                            MOVE
-                        </button>
-                    </div>
-                </div> */}
             </div>
         )
     }

@@ -16,6 +16,15 @@ import './App.css';
 
 
 class App extends Component {
+
+  state = {
+    ipText: null,
+  }
+
+  setIp = (value) => {
+    this.setState({ipText: value});
+  } 
+
   render() {
     return (
       <BrowserRouter>
@@ -23,7 +32,7 @@ class App extends Component {
         <div className="App">
 
           <div id="sidebar">
-            <Sidebar/>
+            <Sidebar onIpInput={this.setIp}/>
           </div>
 
           <div id="section">

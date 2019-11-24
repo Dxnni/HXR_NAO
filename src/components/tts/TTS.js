@@ -7,11 +7,20 @@ class TTS extends Component {
 
     tts = () => {
         let text = this.state.inputText;
-        ElectronNAO.textToSpeech(text);
+        // let num1 = this.state.num1;
+        // let num2 = this.state.num3;
+        // let num3 = this.state.num3;
+        ElectronNAO.runScript("tts", [text], null) ;
+    }
+
+    ip = () => {
+        let text = this.state.ipText;
+        ElectronNAO.setIP(text);
     }
 
     state = {
         inputText: null,
+        ipText: null,
     }
 
     inputChangeHandler = (event) => {
@@ -19,28 +28,57 @@ class TTS extends Component {
             inputText: event.target.value,
         });
     }
+
+    ipChangeHandler = (event) => {
+        this.setState({
+            ipText: event.target.value,
+        });
+    }
     
     render(){
         return (
-            <div id={styles.tts_container}>
+            <div id={styles.tts}>
+                
+                <div id={styles.header}><h1>Text To Speech</h1></div>
 
-                <h3>Text To Speech</h3>
+                <div id={styles.tts_content}>
 
-                <input 
-                    type="text"
-                    name="inputText"
-                    id={styles.tts_input} 
-                    value={ this.state.inputText }
-                    onChange={ this.inputChangeHandler }
-                />
+                    <div className={styles.input}>
+                        <h3>Speech Input</h3>
+                        <input 
+                            type="text"
+                            name="inputText"
+                            id={styles.tts_input} 
+                            value={ this.state.inputText }
+                            onChange={ this.inputChangeHandler }
+                        />
 
-                <button 
-                    id={styles.button}
-                    onClick = {this.tts}
-                > 
-                    SEND 
-                </button>
+                        <button 
+                            id={styles.button}
+                            onClick = {this.tts}
+                        > 
+                            SEND 
+                        </button>
+                    </div>
 
+                    <div className={styles.input}>
+                        <h3>IP Input</h3>
+                        <input 
+                            type="text"
+                            name="inputText"
+                            id={styles.tts_input} 
+                            value={ this.state.ipText }
+                            onChange={ this.ipChangeHandler }
+                        />
+
+                        <button 
+                            id={styles.button}
+                            onClick = {this.ip}
+                        > 
+                            SEND 
+                        </button>
+                    </div>
+                </div>
             </div>
         )
     }
