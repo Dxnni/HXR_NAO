@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000/ && npm run electron-start\"",
-    "build": "electron-packager ./ HXR_NAO_APP --platform=win32 --arch=x64",
+    "build": "npm run react-build && electron-packager ./ HXR_NAO_APP --platform=win32 --arch=x64 --out=../",
     "electron-start": "set DEV=1 && electron .",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
